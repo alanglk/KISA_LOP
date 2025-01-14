@@ -1,0 +1,12 @@
+{
+    "name": "C++",
+    "image": "mcr.microsoft.com/devcontainers/cpp:1-debian-12",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools-extension-pack",
+                "ngtystr.ppm-pgm-viewer-for-vscode" // PPM visualizer
+            ]
+        }
+    }
+}
