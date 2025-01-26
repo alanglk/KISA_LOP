@@ -15,5 +15,5 @@ else
     rm -rf "$BUILD_DIR"/*
 fi
 
-g++ -fdiagnostics-color=always -I "$INCLUDE_DIR" -g "$SRC_FILE" -o "$OUTPUT_FILE"
+g++ -fdiagnostics-color=always -I "$INCLUDE_DIR" -g "$SRC_FILE" -o "$OUTPUT_FILE" -fopenmp
 
