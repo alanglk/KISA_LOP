@@ -10,8 +10,9 @@ typedef struct {
     int *permutation;
     int *matrix;
     int n;
+    int obj_func_computed;
+    int obj_func_value;
 } solution_t;
-
 
 typedef struct {
     solution_t *population;
@@ -19,60 +20,87 @@ typedef struct {
     int n_population;
 } population_t;
 
+typedef struct {
+    int obj_value;
+    int index;
+} solution_result_t;
 
-/// @brief Read file and load it into a matrix
-/// @param file_name File to read
-/// @param n Number of rows and colums 
-/// @param matrix The matrix to load the file in there
-/// @return 
-int read_file(const char *file_name, int **solution, int **matrix, int *n){
-    FILE *f = fopen(file_name, "r");
-        if (f == NULL){
-        perror("Error opening the file\n");
-        return 1;
-    } 
 
-    printf("File oppened\n");
-    fscanf(f, "%d", n);
+/// @brief Reserve memory for each solution
+/// @param solution Solution pointer to reserve memory
+/// @param n Number of elements
+void reserve_memory_for_solution(solution_t *solution, int n){
+    solution->n = n;
+    solution->matrix = (int *)malloc(n * n * sizeof(int));
+    solution->permutation = (int *)malloc(n * sizeof(int));
 
-    printf("%d\n", *n);
-
-    *solution = (int *)malloc((*n) * sizeof(int));
-    for(int i = 0; i<(*n); i++)
-        (*solution)[i] = i;
-
-    *matrix = (int *)malloc((*n) * (*n) * sizeof(int));
-    for (int i = 0; i<(*n)*(*n); i++){
-        fscanf(f, "%d", &(*matrix)[i]);
-    }
-
-    return 0;
+    solution->obj_func_value = 0;
+    solution->obj_func_computed = 0;
 }
 
-int read_file2(const char *file_name, solution_t *sol){
+
+/// @brief Reserve memory for populations
+/// @param population Population pointer to reserve memory
+/// @param n Number of elements for each solution
+/// @param n_population Number of solutions on each population
+void reserve_memory_for_population(population_t *population, int n, int n_population){
+    population->n = n;
+    population->n_population = n_population;
+    population->population = (solution_t *)malloc(n_population * sizeof(solution_t));
+
+    for(int i = 0; i < n_population; i++)
+        reserve_memory_for_solution(&(population->population[i]), n);
+}
+
+void copy_solution(solution_t *solution1, solution_t *solution2, int n){
+    for(int i = 0; i<n; i++){
+        solution1->permutation[i] = solution2->permutation[i];
+        for(int j = 0; j<n; j++)
+            solution1->matrix[i*n+j] = solution2->matrix[i*n+j];
+    }
+    solution1->n = solution2->n;
+    solution1->obj_func_computed = solution2->obj_func_computed;
+    solution1->obj_func_value = solution2->obj_func_value;
+}
+
+void exchange_solutions(solution_t *solution1, solution_t *solution2, int n){
+    solution_t temp_solution;
+    reserve_memory_for_solution(&temp_solution, n);
+
+    copy_solution(&temp_solution, solution1, n);
+    copy_solution(solution1, solution2, n);
+    copy_solution(solution2, &temp_solution, n);
+
+    free(temp_solution.matrix);
+    free(temp_solution.permutation);
+}
+
+
+/// @brief Read file and load it into a solution_t struct
+/// @param file_name File to read
+/// @param sol Struct to store permutation and matrix
+/// @return 0 if all gone well, otherwise 1
+int read_file(const char *file_name, solution_t *sol, int *n){
     FILE *f = fopen(file_name, "r");
         if (f == NULL){
         perror("Error opening the file\n");
         return 1;
     } 
+    printf("File oppened!\n");
 
-    printf("File oppened\n");
-    //*sol = malloc(sizeof(solution_t));
-    fscanf(f, "%d", &(sol->n));
+    // read n value
+    fscanf(f, "%d", n);
 
-    int n = sol->n;
+    // reserve memory for the solution
+    reserve_memory_for_solution(sol, (*n));
 
-    printf("n: %d\n", n);
-
-    sol->matrix = (int *)malloc(n * n * sizeof(int));
-    sol->permutation = (int *)malloc(n * sizeof(int));
-
+    // read permutation matrix from file and initialize the permutation
     for(int i = 0; i<sol->n; i++){
         sol->permutation[i] = i;
-        for(int j= 0; j<sol->n; j++){
-            fscanf(f, "%d", &(sol->matrix[i*n+j]));
-        }
+        for(int j= 0; j<sol->n; j++)
+            fscanf(f, "%d", &(sol->matrix[i*(*n)+j]));
     }
+
     return 0;
 }
 
@@ -81,145 +109,74 @@ int read_file2(const char *file_name, solution_t *sol){
 /// @param matrix Matrix to print
 void print_matrix(int n, int *matrix){
     for(int i = 0; i<n; i++){
-        for(int j = 0; j<n; j++){
+        for(int j = 0; j<n; j++)
             printf("%d ", matrix[i*n+j]);
-        }
         printf("\n");
     }
     printf("\n");
 }
 
+
+/// @brief Print array
+/// @param array Array to print
+/// @param n Number of elements of the array
 void print_array(int *array, int n){
-    for(int i = 0; i<n; i++){
+    for(int i = 0; i<n; i++)
         printf("%d ", array[i]);
-    }
+    printf("\n\n");
+}
+
+
+/// @brief Print solution permutation and matrix
+/// @param solution Solution to print
+/// @param n Number of elements
+void print_solution(solution_t *solution, int n){
+    printf("============\nPrinting solution.\n");
+    print_array(solution->permutation, n);
+    print_matrix(n, solution->matrix);
+}
+
+
+/// @brief Print results on objective function of each solution in the population
+/// @param population Population to print results
+/// @param n_population Number of solutions on population
+void print_results(population_t *population, int n_population, int step){
+    printf("Results on step %d: ", step);
+    for(int i = 0; i<n_population; i++)
+        printf("%d, ", population->population[i].obj_func_value);
     printf("\n\n");
 }
 
 
 /// @brief Objective function for LOP problem
-/// @param matrix Instance to evaluate
-/// @param n Number of rows and columns
-/// @return Value of the objective function for that instance
-int LOP_objective_function(int *matrix, int n){
-    int sum = 0;
+/// @param sol Structure with information to compute and store the objective function
+/// @param n Number of elements
+void LOP_objective_function(solution_t *sol, int n){
+    sol->obj_func_value = 0;
     for(int i = 0; i<n/2; i++)
         for(int j = i+1; j<n; j++)
-            sum += matrix[i*n+j];
-    return sum;
+            sol->obj_func_value += sol->matrix[i*n+j];
+    sol->obj_func_computed=1;
 }
 
-
-/**
- * FIRST ALGORITHM CODE
- */
-
-
-// Mutations --> SEPARARLO EN DOS FUNCIONES PARA NO TENER QUE EJECUTAR LOS IF???
-void insert_op(int *solution, int n, int row, int position){
-    int *temp = (int *)malloc(n*sizeof(int));
-    int tmp;
-
-    //PRIMERA FASE
-    // si row > position, se desplaza el resto hacía abajo
-    // si row < position, se desplaza el resto hacía arriba
-    int i;
-    for(i = 0; i<n; i++){
-        temp[i] = solution[row*n+i]; // guarda el 
-    }
-    if(row < position){
-        for(i = row; i<position; i++){
-            //memcpy((void *)solution[(i+1)*n], (void *)solution[i*n], n*sizeof(int));
-            for(int j = 0; j<n; j++)
-                solution[i*n+j] = solution[(i+1)*n + j];
-        }
-    }
-    else{
-        for(i = row; i>position; i--){
-            //memcpy((void *)solution[(i-1)*n], (void *)solution[i*n], n*sizeof(int));
-
-            for(int j = 0; j<n; j++)
-                solution[i*n+j] = solution[(i-1)*n + j];
-        }
-    }
-    for(i = 0; i<n; i++){
-        solution[position*n+i] = temp[i]; // guarda el 
-    }
-
-    free(temp);
-
-    // SEGUNDA FASE
-    #pragma omp parallel for
-    for(i = 0; i<n; i++){
-        tmp = solution[i * n + row]; // store the one that must be moved
-                
-        if(row < position){
-            for(int j = row; j<position; j++){
-                solution[i * n + j] = solution[i * n + j + 1];
-            }
-        }
-        else{
-            for(int j = row; j>position; j--){
-                solution[i * n + j] = solution[i*n + j - 1];
-            }
-        }
-        solution[i*n + position] = tmp;
-    }
-}
-
-/// @brief Swap operation between two elements. Cost O(2N) --> O(N)
-/// @param solution The matrix
-/// @param n Number of elements 
-/// @param s1 
-/// @param s2 
-void swap_op(int *solution, int n, int s1, int s2){
-    int *temp = (int *)malloc(n * sizeof(int));
-    int tmp;
-    // first phase O(n)
-    int i;
-    for(i=0; i<n; i++){
-        temp[i] = solution[s1 * n + i];
-        solution[s1 * n + i] = solution[s2 * n + i];
-        solution[s2 * n + i] = temp[i];
-    }
-
-    free(temp);
-
-    for(i = 0; i<n; i++){
-        tmp = solution[i * n + s1];
-        solution[i * n + s1] = solution[i * n + s2];
-        solution[i * n + s2] = tmp; 
-    }
-}
-
-void swap_op2(solution_t *solution, int n, int s1, int s2){
-    int *temp = (int *)malloc(n * sizeof(int));
-    int tmp;
-
+/// @brief Swap values on permutation of solution_t. Cost O(1)
+/// @param solution Solution_t structure with the permutation
+/// @param n Number of elements
+/// @param s1 First index to swap
+/// @param s2 Second index to swap
+void swap_permutation(solution_t *solution, int n, int s1, int s2){
     // swap permutation | O(1)
-    tmp = solution->permutation[s1];
+    int tmp = solution->permutation[s1];
     solution->permutation[s1] = solution->permutation[s2];
     solution->permutation[s2] = tmp;
-
-    // swap matrix | twp phases: O(N) + O(N) = O(2N) === O(N)
-    // first phase O(n)
-    int i;
-    for(i=0; i<n; i++){
-        temp[i] = solution->matrix[s1 * n + i];
-        solution->matrix[s1 * n + i] = solution->matrix[s2 * n + i];
-        solution->matrix[s2 * n + i] = temp[i];
-    }
-
-    free(temp);
-
-    for(i = 0; i<n; i++){
-        tmp = solution->matrix[i * n + s1];
-        solution->matrix[i * n + s1] = solution->matrix[i * n + s2];
-        solution->matrix[i * n + s2] = tmp; 
-    }
 }
 
-void swap_only_matrix(solution_t *solution, int n, int s1, int s2){
+/// @brief Swap matrix of Solution_t. Cost O(2N) --> O(N)
+/// @param solution Solution_t structure with the permutation
+/// @param n Number of elements
+/// @param s1 First index to swap
+/// @param s2 Second index to swap
+void swap_matrix(solution_t *solution, int n, int s1, int s2){
     int *temp = (int *)malloc(n * sizeof(int));
     int tmp;
 
@@ -229,10 +186,10 @@ void swap_only_matrix(solution_t *solution, int n, int s1, int s2){
     for(i=0; i<n; i++){
         temp[i] = solution->matrix[s1 * n + i];
         solution->matrix[s1 * n + i] = solution->matrix[s2 * n + i];
-        solution->matrix[s2 * n + i] = temp[i];
+        solution->matrix[s2 * n + i] = temp[i]; // copy the value, no the pointer
     }
 
-    free(temp);
+    free(temp); // this pointer can be liberated as values have been copied, no the pointer itself
 
     for(i = 0; i<n; i++){
         tmp = solution->matrix[i * n + s1];
@@ -241,182 +198,112 @@ void swap_only_matrix(solution_t *solution, int n, int s1, int s2){
     }    
 }
 
-void swap_op_generate_new(int *new_matrix, int *matrix, int n, int s1, int s2){
-    int *temp = (int *)malloc(n * sizeof(int));
-    int tmp;
-    int i;
-
-    // copy
-    for(i = 0; i<n; i++){
-        for(int j=0; j<n; j++){
-            new_matrix[i*n+j] = matrix[i*n+j];
-        }
-    }
-
-    // first phase O(n)
-    for(i=0; i<n; i++){
-        temp[i] = new_matrix[s1 * n + i];
-        new_matrix[s1 * n + i] = new_matrix[s2 * n + i];
-        new_matrix[s2 * n + i] = temp[i];
-    }
-
-    free(temp);
-
-    for(i = 0; i<n; i++){
-        tmp = new_matrix[i * n + s1];
-        new_matrix[i * n + s1] = new_matrix[i * n + s2];
-        new_matrix[i * n + s2] = tmp; 
-    }
+/// @brief Swap operation between two elements. Swaps permutation and matrix. Computational cost: O(2N) --> O(N)
+/// @param solution Structure with permutation and matrix to swap
+/// @param n Number of elements
+/// @param s1 First index to swap with
+/// @param s2 Second index to swap with
+void swap_op(solution_t *solution, int n, int s1, int s2){
+    // swap the permutation
+    swap_permutation(solution, n, s1, s2);
+    // swap the matrix
+    swap_matrix(solution, n, s1, s2);
 }
 
-/// @brief Generates a new instance by the swap operation
-/// @param new_sol New instance generated by swap operation
-/// @param sol Base instance to generate the new instance
-/// @param n Number of elements in the permutation
-/// @param s1 First index for the swap
-/// @param s2 Second index for the swap
-void swap_op_generate_new2(solution_t *new_sol, solution_t *sol, int n, int s1, int s2){
-    int *temp = (int *)malloc(n * sizeof(int));
-    int tmp;
-    int i;
-
-    // copy
-    for(i = 0; i<n; i++){
-        new_sol->permutation[i] = sol->permutation[i]; // copy permutation
-        for(int j=0; j<n; j++){ 
-            new_sol->matrix[i*n+j] = sol->matrix[i*n+j]; // copy matrix
-        }
-    }
-    swap_op2(new_sol, n, s1, s2);
-}
-
-void generate_new_variant_from_instance(int ***population, int *init_instance, int n, int n_population){
-    *population = (int **)malloc(n_population * sizeof(int *));
-
-    for(int i = 0; i<n_population; i++)
-        (*population)[i] = (int *)malloc(n * n * sizeof(int));
-
-    printf("Memory reserved\n");
-
-    int index1;
-    int index2;
-    for(int i = 0; i<n_population; i++){
-        index1 = rand() % n;
-        index2 = rand() % n;
-        printf("In population memeber %d generating new instance swapping indexed %d and %d...\n", i, index1, index2);
-        swap_op_generate_new((*population)[i], init_instance, n, index1, index2);
-        printf("Starting process...\n");
-        for(int j = 0; j<250; j++){
-            index1 = rand() % n;
-            index2 = rand() % n;
-            swap_op((*population)[i], n, index1, index2);
-        }
-        printf("%d finished!\n", i);
-    }
-}
-
+/// @brief Generates a new instance from the actual instance
+/// @param population Population of solutions to store generated solutions
+/// @param init_solution Initial solution to generate the new ones
+/// @param n Number of elements
+/// @param n_population Number of elements for the population
 void generate_new_instance(population_t *population, solution_t *init_solution, int n, int n_population){
     population->n_population = n_population;
     population->n = n;
 
-    population->population = (solution_t *)malloc(n_population * sizeof(solution_t));
+    // Copy the solution readed from file into population
+    population->population[0] = *init_solution; // Copy struct values
 
-    // Allocate memory for each solution of the population
-    for(int i = 0; i<n_population; i++){
-        population->population[i].matrix = (int *)malloc(n * n * sizeof(int));
-        population->population[i].permutation = (int *)malloc(n * sizeof(int));
-    }
-
-    population->population[0] = *init_solution;
-
-
+    // Generate new solutions
     int index1, index2, i, j;
-    for(i=1; i<n_population; i++){
-        index1 = rand() % n;
-        index2 = rand() % n;
-        swap_op_generate_new2(&(population->population[i]), init_solution, n, index1, index2);
-        for(j=0; j<250; j++){
+    for(i=1; i<n_population; i++){        
+        // Generate new solution by first copying actual and then making changes (n*10 swaps)
+        copy_solution(&(population->population[i]), init_solution, n); // copy actual solution
+        
+        for(j=0; j<(n*125); j++){
             index1 = rand() % n;
             index2 = rand() % n;
-            swap_op2(&population->population[i], n, index1, index2);
+            swap_op(&(population->population[i]), n, index1, index2);
         }
     }
 }
 
-// Crossovers
+/**
+ * Operadores de Cruce (crossover operators)
+ *  */
+
+/// @brief Order crossover operator
+/// @param parent1 The first parent to realize the operation
+/// @param parent2 The second parent to generate the child
+/// @param child Child generated from both parents
+/// @param n Number of elements
 void cruce_orden(solution_t *parent1, solution_t *parent2, solution_t *child, int n){
     int i, j, z;
     int start, end;
 
-    // initialize child permutation and matrix
+    // Initialize child permutation and matrix
     for (i = 0; i < n; i++){
-        child->permutation[i] = -1; // initialize permutation with -1 value on all positions
+        child->permutation[i] = -1; // Initialize permutation with -1 value on all positions
         for(j=0; j<n; j++)
-            child->matrix[i*n+j] = parent1->matrix[i*n+j]; // initialize matrix with parent1 values (then execute swaps)
+            child->matrix[i*n+j] = parent1->matrix[i*n+j]; // Initialize matrix with parent1 values (then execute swaps)
     }
 
-    // Generar índices aleatorios para el rango
+    // Take a random range to maintain from the first parent
     start = rand() % n;
     end = start + rand() % (n - start);
 
-    // copiar el parent1 en el hijo
+    // Copy the range on the child
     for(i=start; i<=end; i++)
         child->permutation[i] = parent1->permutation[i];
 
-    //print_array(child->permutation, n);
-
+    // Fill the rest with values from parent2 in order
     int exists = 0;
     int next_index = (end+1) % n;
-    for(i = 0; i<n; i++){
+    for(i = 0; i<n; i++){ // loop parent2 elements
         int elem = parent2->permutation[(end+1+i)%n];
         exists = 0;
 
-        for(j=0; j<n; j++){
+        // Check if the element is already on the child
+        for(j=0; j<n; j++)
             if(child->permutation[j]==elem)
                 exists = 1;
-        }
 
+        // If the element does not exist on child, insert on the next position
         if(exists == 0){
             child->permutation[next_index] = elem;
             next_index = (next_index + 1) % n;
         }
     }
 
-    //print_array(parent1->permutation, n);
-    //print_array(parent2->permutation, n);
-    //print_array(child->permutation, n);
-
-
-    // se utiliza la copia para después modificar la matriz
+    // Generate parent1 copy
     solution_t parent1_copy;
-    parent1_copy.n = parent1->n;
-    parent1_copy.matrix = (int *)malloc(n*n*sizeof(int));
-    parent1_copy.permutation = (int *)malloc(n*sizeof(int));
+    reserve_memory_for_solution(&parent1_copy, n);
 
-    for(i=0; i<n; i++){
-        parent1_copy.permutation[i] = parent1->permutation[i];
-        for(j=0; j<n; j++)
-            parent1_copy.matrix[i*n+j] = parent1->matrix[i*n+j];
-    }
+    // Generate the child matrix running swap operations on parent1
+    // Copy parent 1
+    copy_solution(&parent1_copy, parent1, n);
 
-    // cruce en matrices
-    for(i=0; i<n; i++){
-        if(parent1_copy.permutation[(end + 1 + i) % n] != child->permutation[(end + 1 + i) % n]){ // find the value of the child on parent and swap
-            for(j=0; j<n; j++){
+    // Swap matrix on child finding differences from parent1
+    for(i=0; i<n; i++)
+        // if there is a difference between parent and child swap
+        if(parent1_copy.permutation[(end + 1 + i) % n] != child->permutation[(end + 1 + i) % n]) // find the value of the child on parent and swap
+            for(j=0; j<n; j++)
                 if(parent1_copy.permutation[j] == child->permutation[(end+1+i)%n]){
                     //printf("Difference founded on parent (%d) and child (%d)\n", j, (end+i+1)%n);
-                    swap_op2(&parent1_copy, n, j, (end+1+i)%n);
-                    swap_only_matrix(child, n, j, (end+1+i)%n);
+                    swap_op(&parent1_copy, n, j, (end+1+i)%n);
+                    swap_matrix(child, n, j, (end+1+i)%n);
                 }
-            }
-        }
-    }
 
     free(parent1_copy.matrix);
     free(parent1_copy.permutation);
-
-    //print_matrix(n, parent1->matrix);
-    //print_matrix(n, child->matrix);
 }
 
 void cruce_mapped(){
@@ -429,25 +316,247 @@ void cruce_ciclos(){
 
 
 /**
- * GENETIC ALGORITHM CODE
- *  */
-void GA(population_t population, int n, int n_population){ // pasar operadores de cruce y mutación?
+ * Selection functions
+ */
+
+void ruleta(){
+
+}
+
+void elitista(){
+
+}
+
+/// @brief Tournament to select the parents of the new generation
+/// @param selected_parents Indexes of solutions selected as parents
+/// @param n_parents Number of parents of the new generation
+/// @param population Population of solutions
+/// @param k Number of solutions that compite on the tournament to be the parent
+/// @param n Number of elements
+void tournament(int *selected_parents, int n_parents, population_t *population, int k, int n){
+    int *competitors, i, j; // selected solution indexes and amount of selected parents
+    competitors = (int *)malloc(k * sizeof(int));
     
+    // select n_parents parents
+    int n_selected_parents = 0;
+    int best_index, best_value;
 
-    // Algorithm loop
-    while(true){
-        // Elegir parents
+    // Loop to select n_parents parents
+    while(n_selected_parents < n_parents){
+        // Initialize competitors
+        for(i=0; i<k; i++)
+            competitors[i] = -1;
 
+        // select k solutions to compite to be the parent
+        i = 0;
+        while(i<k){
+            int next_selec = rand() % population->n_population; // select an element
 
-        // Crossover
-        //cruce_orden();
+            // check if the parent is already a parent or is selected to compite in the tournament
+            int founded = 0;
 
-        // Mutation
-        //swap_op2();
+            // check if is selected as competitor
+            for(int j=0; j<i; j++){
+                if(next_selec == competitors[j])   
+                    founded = 1;
+            
+            // check if is selected as parent
+            for(int j = 0; j<n_selected_parents; j++)
+                if(next_selec == selected_parents[j])
+                    founded=1;
+            }
 
-        // Selection
+            // if not in any ot both lists, add to competitors list
+            if(founded==0){
+                competitors[i] = next_selec;
+                i++;
+            }
+        }
+
+        // Tournament: Select the best competitors
+        best_index = -1;
+        best_value = 0;
+        for(i = 0; i<k; i++){
+            j = competitors[i]; // get index of competitor
+
+            // if not evaluated, evaluate j. solution
+            if(population->population[j].obj_func_computed == 0)
+                LOP_objective_function(&(population->population[j]), n);
+        
+            if(population->population[j].obj_func_value >= best_value){ // there can be equal values
+                best_value = population->population[j].obj_func_value;
+                best_index = j;
+            }
+        }
+
+        // add the winner of the tournament to the parent list
+        selected_parents[n_selected_parents] = best_index;
+        n_selected_parents ++;
     }
 
+    // free memory
+    free(competitors);
+}
+
+
+/** SELECTION FUNCTIONS */
+void elitist_selection(population_t *population, population_t *new_population, int n, int n_population){
+    // compare
+    int *selected_children = (int *)malloc(n_population * sizeof(int));
+
+    // Change the worst on population by the best on new_population if is better
+    int improvement = 1, worst_index, best_index, worst_value, best_value;
+    int i;
+
+    while(improvement==1){
+        // find the worst on population and the best on new_population
+        best_index = -1, worst_index = -1, worst_value = 999999999, best_value = -1;
+        for(i=0; i<n_population; i++){
+            if(population->population[i].obj_func_value < worst_value){
+                worst_index = i;
+                worst_value = population->population[i].obj_func_value;
+            }
+
+            if(new_population->population[i].obj_func_value > best_value){
+                best_index = i;
+                best_value = new_population->population[i].obj_func_value;
+            }        
+        }
+
+        // compare both, if new population one is better, change
+        if(worst_value < best_value){
+            //printf("Changing\n");
+            //printf("Worst (index, value) = (%d, %d), best (index, value) = (%d, %d)\n", worst_index, worst_value, best_index, best_value);
+            exchange_solutions(&(population->population[worst_index]), &(new_population->population[best_index]), n);
+        }
+        else{
+            improvement = 0; // no more improvements can be done
+        }
+    }
+    free(selected_children);
+}
+
+/**
+ * GENETIC ALGORITHM CODE
+ *  */
+void GA(population_t *population, int n, int n_population){ // pasar operadores de cruce y mutación?
+    // Algorithm loop
+    
+    int steps = 10;
+    int step = 0;
+
+    int n_parents = 2; // two parents to generate a child
+    int n_generated_childs = 0;
+    int i, j, k;
+
+    int *i_parents = (int *)malloc(n_parents * sizeof(int));
+    k = 3;
+
+    // n_population must be higher than k
+
+    // Move the next to function???
+    population_t child_population;
+    reserve_memory_for_population(&child_population, n, n_population);
+
+    printf("Starting GA execution\n");
+    for(step=0; step<steps; step++){
+        //initialize i_parents
+        for(i = 0; i<n_parents; i++)
+            i_parents[i] = -1; // no parent selected
+
+        // Select n_parents parents
+        tournament(i_parents, n_parents, population, k, n);
+        printf("Tournament passed\n");
+
+        // Generate the new population by crossover and mutation operations
+        for(i=0; i<n_population; i++){
+            cruce_orden(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n);
+            printf("%d cruce passed\n", i);
+            
+            int s1, s2;
+            s1 = rand() % n;
+            s2 = rand() % n;
+            swap_op(&(child_population.population[i]), i, s1, s2);
+            printf("%d swap passed\n", i);
+        }
+        
+        // Compute objective function values
+        for(i = 0; i<n_population; i++){
+            //if(population->population[i].obj_func_computed==0)
+                LOP_objective_function(&(population->population[i]), n);
+
+            //if(child_population.population[i].obj_func_computed==0)
+                LOP_objective_function(&(child_population.population[i]), n);
+        }
+
+        print_results(population, n_population, step);
+
+        printf("=================\n=================\n");
+        printf("Print population\n");
+        for(i = 0; i<n_population; i++){
+            printf("Solution %d, obj. value %d, permutation: ", i, population->population[i].obj_func_value);
+            for(j=0; j<n; j++){
+                printf("%d ", population->population[i].permutation[j]);
+            }
+            printf("\n");
+        }
+
+        /*for(i = 0; i<n_population; i++){
+            print_matrix(n, population->population[i].matrix);
+        }*/
+
+        printf("\n\n");
+        
+        printf("Print child population\n");
+        for(i = 0; i<n_population; i++){
+            printf("Solution %d, obj. value %d, permutation: ", i, child_population.population[i].obj_func_value);
+            for(j=0; j<n; j++){
+                printf("%d ", child_population.population[i].permutation[j]);
+            }
+            printf("\n");
+        }
+        //printf("\n\n");
+
+        // Selection of the new population
+        elitist_selection(population, &child_population, n, n_population);
+        printf("Elitism passed\n");
+        // Not really necessary
+        /*for(i = 0; i<n_population; i++){
+            if(population->population[i].obj_func_computed==0)
+                LOP_objective_function(&(population->population[i]), n);
+        }*/
+
+        printf("=================\n");
+
+        
+        printf("Print population\n");
+        for(i = 0; i<n_population; i++){
+            printf("Solution %d, obj. value %d, permutation: ", i, population->population[i].obj_func_value);
+            for(j=0; j<n; j++){
+                printf("%d ", population->population[i].permutation[j]);
+            }
+            printf("\n");
+        }
+        printf("\n\n");
+        
+        printf("Print child population\n");
+        for(i = 0; i<n_population; i++){
+            printf("Solution %d, obj. value %d, permutation: ", i, child_population.population[i].obj_func_value);
+            for(j=0; j<n; j++){
+                printf("%d ", child_population.population[i].permutation[j]);
+            }
+            printf("\n");
+        }
+        printf("\n\n");
+
+        printf("=================\n=================\n");
+        /*if(step % 10 == 0){
+            printf("Solutions in step %d: ", step);
+            for(i = 0; i<n_population; i++)
+                printf("%d ", population->population[i].obj_func_value);
+            printf("\n");
+        }*/
+    }
 }
 
 
@@ -455,68 +564,84 @@ int main(int argc, char *argv[]){
 
     int *solution = NULL, *matrix = NULL; // solution es la permutación que le corresponde a la solución, matrix su matriz
     int n; // cantidad de filas y columnas de la matriz
-
-    /*read_file(argv[1], &solution, &matrix, &n);
-
-    //printf("Printing matrix... \n");
-    //print_matrix(n, matrix);
-    //printf("Matrix printed!\n");
-
-    int result = LOP_objective_function(matrix, n);
-    //printf("Result: %d\n", result);
-
-
-    // Start measuring time
-    auto begin = std::chrono::high_resolution_clock::now();
-    //for(int i = 0; i<10000000; i++)
-    //swap_op(matrix, n, 0, 2);
-    // Stop measuring time and calculate the elapsed time
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-
-    //printf("Result: %.20f\n", sum);
-    
-    //printf("Time measured: %.3f seconds.\n", elapsed.count() * 1e-9);
-    //print_matrix(n, matrix);
-    
-    // generate new instances
-    int **population;
     int n_population = 5;
-    generate_new_variant_from_instance(&population, matrix, n, n_population);
-
-    for(int i = 0; i<n_population; i++){
-        print_matrix(n, population[i]);
-    }
-
-
-*/
 
     solution_t sol;
-    read_file2(argv[1], &sol);
-
-    printf("n: %d\n\n", sol.n);
-
-    print_array(sol.permutation, sol.n);
-    print_matrix(sol.n, sol.matrix);
-
-
     population_t population;
-    printf("Generating new solutions for the initial population\n");
-    generate_new_instance(&population, &sol, sol.n, 5);
 
-    for(int i = 0; i<5; i++){
+
+    // read file and load initial solution
+    read_file(argv[1], &sol, &n);
+    printf("n: %d\n\n", n);
+
+    //print_array(sol.permutation, sol.n);
+    //print_matrix(sol.n, sol.matrix);
+
+
+    // Generate new solutions for the population
+    printf("Generating new solutions for the initial population\n");
+    reserve_memory_for_population(&population, n, n_population);
+    generate_new_instance(&population, &sol, sol.n, n_population);
+
+    /*for(int i = 0; i<n_population; i++){
         print_array(population.population[i].permutation, sol.n);
         print_matrix(sol.n, population.population[i].matrix);
         printf("=========\n");
+    }*/
+
+    /* TESTING CUTRE  -->  SWAP WORKS CORRECTLY*/
+    // swap
+    /*print_solution(&sol, n);
+
+    // swap
+    swap_op(&sol, n, 0, 1);
+    print_solution(&sol, n);
+
+    // restore
+    swap_op(&sol, n, 0, 1);
+    print_solution(&sol, n);
+
+    swap_op(&sol, n, 0, 9);
+    print_solution(&sol, n);*/
+
+
+    /* CRUCE ORDEN  --> ORDER CROSSOVER WORKS CORRECTLY*/
+    /*solution_t sol2;
+    reserve_memory_for_solution(&sol2, n);
+
+    // copy sol in sol2
+    for(int i = 0; i<n; i++){
+        sol2.permutation[i] = sol.permutation[i];
+        for(int j=0; j<n; j++)
+            sol2.matrix[i*n+j] = sol.matrix[i*n+j];
     }
 
-    solution_t child;
-    child.matrix = (int *)malloc(sol.n * sol.n * sizeof(int));
-    child.permutation = (int *)malloc(sol.n * sizeof(int));
+    // swap sol2
+    for(int i = 0; i<200; i++){
+        int s1 = rand() % n;
+        int s2 = rand() % n;
+        swap_op(&sol2, n, s1, s2);
+    }
 
-    auto begin = std::chrono::high_resolution_clock::now();
-    //for(int i = 0; i<5000000; i++)
-    cruce_orden(&population.population[1], &population.population[2], &child, sol.n);
+    // imprime ambas soluciones
+    print_solution(&sol, n);
+    print_solution(&sol2, n);
+
+
+    solution_t child;
+    reserve_memory_for_solution(&child, n);
+
+    for(int i = 0; i<50; i++)
+        cruce_orden(&sol, &sol2, &child, n);
+
+    // print child
+    print_solution(&child, n);*/
+
+
+
+
+    auto begin = std::chrono::high_resolution_clock::now();    
+    GA(&population, n, n_population);
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
@@ -524,4 +649,3 @@ int main(int argc, char *argv[]){
 
     return 0;
 }
-
