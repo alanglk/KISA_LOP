@@ -15,7 +15,7 @@ int read_file(const char *file_name, solution_t *sol, int *n){
         perror("Error opening the file\n");
         return 1;
     } 
-    //printf("File oppened!\n");
+    printf("File oppened!\n");
 
     // read n value
     fscanf(f, "%d", n);

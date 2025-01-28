@@ -17,11 +17,15 @@
  * Being n the amount of elements in a permutation, there are !n possible combinations, so population size must be lower than that
  */
 
-int main(int argc, char *argv[]){
-
+int main(int argc, char *argv[]){    
     int *solution = NULL, *matrix = NULL; // solution es la permutación que le corresponde a la solución, matrix su matriz
     int n; // cantidad de filas y columnas de la matriz
-    int n_population = 5;
+    int n_population = 300;
+
+
+    // randomize seed
+    srand (time(NULL));
+
 
     solution_t sol;
     population_t population;
@@ -35,6 +39,14 @@ int main(int argc, char *argv[]){
     reserve_memory_for_population(&population, n, n_population);
     generate_new_instance(&population, &sol, sol.n, n_population);
 
+
+    // print initial population to check that there are not equals
+    /*printf("Printing initial population...\n");
+    for(int i = 0; i<n_population; i++){
+        print_solution(&(population.population[i]), n);
+    }
+    printf("initial population printed!\n");*/
+
     auto begin = std::chrono::high_resolution_clock::now();    
     GA(&population, n, n_population);
     auto end = std::chrono::high_resolution_clock::now();
@@ -46,6 +58,10 @@ int main(int argc, char *argv[]){
         for(int j=0; j<n; j++){
             printf("%d ", population.population[i].permutation[j]);
         }
+        printf("\n");
+
+        //print_matrix(n, population.population[i].matrix);
+
         printf("\n");
     }
     printf("\n\n");

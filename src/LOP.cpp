@@ -54,8 +54,24 @@ int check_equals(solution_t *sol1, solution_t *sol2, int n){
 /// @param n Number of elements
 void LOP_objective_function(solution_t *sol, int n){
     sol->obj_func_value = 0;
-    for(int i = 0; i<n/2; i++)
+    for(int i = 0; i<(n+1)/2; i++)
         for(int j = i+1; j<n; j++)
             sol->obj_func_value += sol->matrix[i*n+j];
     sol->obj_func_computed=1;
+}
+
+int factorial(int n){
+    return n * (factorial(n-1));
+}
+
+void evaluate_all_solutions(solution_t *init_sol, int n){
+
+    //copy initial solution n times
+    solution_t sol2, sol3, sol4;
+
+    int lower_amount_solution = factorial(n-1);
+    int amount_solution = lower_amount_solution * n;
+    for(int i = 0; i<n; i++){
+        
+    }
 }

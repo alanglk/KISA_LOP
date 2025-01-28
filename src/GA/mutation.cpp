@@ -49,6 +49,9 @@ void swap_matrix(solution_t *solution, int n, int s1, int s2){
 /// @param s1 First index to swap with
 /// @param s2 Second index to swap with
 void swap_op(solution_t *solution, int n, int s1, int s2){
+    if(s1 == s2) 
+        s2 = (s2 + 1) % n; // indexes to swap can not be the same
+
     // swap the permutation
     swap_permutation(solution, n, s1, s2);
     // swap the matrix
