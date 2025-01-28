@@ -1,5 +1,7 @@
 /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/main.dir
 /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/order_crossover_testing.dir
 /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/swap_testing.dir
+/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/tournament_selection_testing.dir
+/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/elitist_selector_testing.dir
 /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/edit_cache.dir
 /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/rebuild_cache.dir

@@ -155,6 +155,32 @@ swap_testing/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/build
 .PHONY : swap_testing/fast
 
+#=============================================================================
+# Target rules for targets named tournament_selection_testing
+
+# Build rule for target.
+tournament_selection_testing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tournament_selection_testing
+.PHONY : tournament_selection_testing
+
+# fast build rule for target.
+tournament_selection_testing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/build
+.PHONY : tournament_selection_testing/fast
+
+#=============================================================================
+# Target rules for targets named elitist_selector_testing
+
+# Build rule for target.
+elitist_selector_testing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 elitist_selector_testing
+.PHONY : elitist_selector_testing
+
+# fast build rule for target.
+elitist_selector_testing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/build
+.PHONY : elitist_selector_testing/fast
+
 src/GA/GA.o: src/GA/GA.cpp.o
 .PHONY : src/GA/GA.o
 
@@ -163,6 +189,8 @@ src/GA/GA.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/GA.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/GA.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/GA.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/GA.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/GA.cpp.o
 .PHONY : src/GA/GA.cpp.o
 
 src/GA/GA.i: src/GA/GA.cpp.i
@@ -173,6 +201,8 @@ src/GA/GA.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/GA.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/GA.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/GA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/GA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/GA.cpp.i
 .PHONY : src/GA/GA.cpp.i
 
 src/GA/GA.s: src/GA/GA.cpp.s
@@ -183,6 +213,8 @@ src/GA/GA.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/GA.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/GA.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/GA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/GA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/GA.cpp.s
 .PHONY : src/GA/GA.cpp.s
 
 src/GA/crossover.o: src/GA/crossover.cpp.o
@@ -193,6 +225,8 @@ src/GA/crossover.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/crossover.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/crossover.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/crossover.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/crossover.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/crossover.cpp.o
 .PHONY : src/GA/crossover.cpp.o
 
 src/GA/crossover.i: src/GA/crossover.cpp.i
@@ -203,6 +237,8 @@ src/GA/crossover.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/crossover.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/crossover.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/crossover.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/crossover.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/crossover.cpp.i
 .PHONY : src/GA/crossover.cpp.i
 
 src/GA/crossover.s: src/GA/crossover.cpp.s
@@ -213,6 +249,8 @@ src/GA/crossover.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/crossover.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/crossover.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/crossover.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/crossover.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/crossover.cpp.s
 .PHONY : src/GA/crossover.cpp.s
 
 src/GA/mutation.o: src/GA/mutation.cpp.o
@@ -223,6 +261,8 @@ src/GA/mutation.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/mutation.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/mutation.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/mutation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/mutation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/mutation.cpp.o
 .PHONY : src/GA/mutation.cpp.o
 
 src/GA/mutation.i: src/GA/mutation.cpp.i
@@ -233,6 +273,8 @@ src/GA/mutation.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/mutation.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/mutation.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/mutation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/mutation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/mutation.cpp.i
 .PHONY : src/GA/mutation.cpp.i
 
 src/GA/mutation.s: src/GA/mutation.cpp.s
@@ -243,6 +285,8 @@ src/GA/mutation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/mutation.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/mutation.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/mutation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/mutation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/mutation.cpp.s
 .PHONY : src/GA/mutation.cpp.s
 
 src/GA/parent_selection.o: src/GA/parent_selection.cpp.o
@@ -253,6 +297,8 @@ src/GA/parent_selection.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/parent_selection.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/parent_selection.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/parent_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/parent_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/parent_selection.cpp.o
 .PHONY : src/GA/parent_selection.cpp.o
 
 src/GA/parent_selection.i: src/GA/parent_selection.cpp.i
@@ -263,6 +309,8 @@ src/GA/parent_selection.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/parent_selection.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/parent_selection.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/parent_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/parent_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/parent_selection.cpp.i
 .PHONY : src/GA/parent_selection.cpp.i
 
 src/GA/parent_selection.s: src/GA/parent_selection.cpp.s
@@ -273,6 +321,8 @@ src/GA/parent_selection.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/parent_selection.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/parent_selection.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/parent_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/parent_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/parent_selection.cpp.s
 .PHONY : src/GA/parent_selection.cpp.s
 
 src/GA/population_selection.o: src/GA/population_selection.cpp.o
@@ -283,6 +333,8 @@ src/GA/population_selection.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/population_selection.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/population_selection.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/population_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/population_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/population_selection.cpp.o
 .PHONY : src/GA/population_selection.cpp.o
 
 src/GA/population_selection.i: src/GA/population_selection.cpp.i
@@ -293,6 +345,8 @@ src/GA/population_selection.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/population_selection.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/population_selection.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/population_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/population_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/population_selection.cpp.i
 .PHONY : src/GA/population_selection.cpp.i
 
 src/GA/population_selection.s: src/GA/population_selection.cpp.s
@@ -303,6 +357,8 @@ src/GA/population_selection.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/population_selection.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/population_selection.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/population_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA/population_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA/population_selection.cpp.s
 .PHONY : src/GA/population_selection.cpp.s
 
 src/GA_testing/Crossover/order_crossover_testing.o: src/GA_testing/Crossover/order_crossover_testing.cpp.o
@@ -353,6 +409,54 @@ src/GA_testing/Mutation/swap_testing.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA_testing/Mutation/swap_testing.cpp.s
 .PHONY : src/GA_testing/Mutation/swap_testing.cpp.s
 
+src/GA_testing/Parent_selector/tournament/tournament_selection_testing.o: src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.o
+.PHONY : src/GA_testing/Parent_selector/tournament/tournament_selection_testing.o
+
+# target to build an object file
+src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.o
+.PHONY : src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.o
+
+src/GA_testing/Parent_selector/tournament/tournament_selection_testing.i: src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.i
+.PHONY : src/GA_testing/Parent_selector/tournament/tournament_selection_testing.i
+
+# target to preprocess a source file
+src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.i
+.PHONY : src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.i
+
+src/GA_testing/Parent_selector/tournament/tournament_selection_testing.s: src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.s
+.PHONY : src/GA_testing/Parent_selector/tournament/tournament_selection_testing.s
+
+# target to generate assembly for a file
+src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.s
+.PHONY : src/GA_testing/Parent_selector/tournament/tournament_selection_testing.cpp.s
+
+src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.o: src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.o
+.PHONY : src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.o
+
+# target to build an object file
+src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.o
+.PHONY : src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.o
+
+src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.i: src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.i
+.PHONY : src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.i
+
+# target to preprocess a source file
+src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.i
+.PHONY : src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.i
+
+src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.s: src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.s
+.PHONY : src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.s
+
+# target to generate assembly for a file
+src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.s
+.PHONY : src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.cpp.s
+
 src/IO.o: src/IO.cpp.o
 .PHONY : src/IO.o
 
@@ -361,6 +465,8 @@ src/IO.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/IO.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/IO.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/IO.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/IO.cpp.o
 .PHONY : src/IO.cpp.o
 
 src/IO.i: src/IO.cpp.i
@@ -371,6 +477,8 @@ src/IO.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/IO.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/IO.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/IO.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/IO.cpp.i
 .PHONY : src/IO.cpp.i
 
 src/IO.s: src/IO.cpp.s
@@ -381,6 +489,8 @@ src/IO.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/IO.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/IO.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/IO.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/IO.cpp.s
 .PHONY : src/IO.cpp.s
 
 src/LOP.o: src/LOP.cpp.o
@@ -391,6 +501,8 @@ src/LOP.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LOP.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/LOP.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/LOP.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/LOP.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/LOP.cpp.o
 .PHONY : src/LOP.cpp.o
 
 src/LOP.i: src/LOP.cpp.i
@@ -401,6 +513,8 @@ src/LOP.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LOP.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/LOP.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/LOP.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/LOP.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/LOP.cpp.i
 .PHONY : src/LOP.cpp.i
 
 src/LOP.s: src/LOP.cpp.s
@@ -411,6 +525,8 @@ src/LOP.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LOP.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/LOP.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/LOP.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/LOP.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/LOP.cpp.s
 .PHONY : src/LOP.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -445,6 +561,8 @@ src/memory.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/memory.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/memory.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/memory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/memory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/memory.cpp.o
 .PHONY : src/memory.cpp.o
 
 src/memory.i: src/memory.cpp.i
@@ -455,6 +573,8 @@ src/memory.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/memory.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/memory.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/memory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/memory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/memory.cpp.i
 .PHONY : src/memory.cpp.i
 
 src/memory.s: src/memory.cpp.s
@@ -465,6 +585,8 @@ src/memory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/memory.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/memory.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/memory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tournament_selection_testing.dir/build.make CMakeFiles/tournament_selection_testing.dir/src/memory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elitist_selector_testing.dir/build.make CMakeFiles/elitist_selector_testing.dir/src/memory.cpp.s
 .PHONY : src/memory.cpp.s
 
 # Help Target
@@ -475,9 +597,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... elitist_selector_testing"
 	@echo "... main"
 	@echo "... order_crossover_testing"
 	@echo "... swap_testing"
+	@echo "... tournament_selection_testing"
 	@echo "... src/GA/GA.o"
 	@echo "... src/GA/GA.i"
 	@echo "... src/GA/GA.s"
@@ -499,6 +623,12 @@ help:
 	@echo "... src/GA_testing/Mutation/swap_testing.o"
 	@echo "... src/GA_testing/Mutation/swap_testing.i"
 	@echo "... src/GA_testing/Mutation/swap_testing.s"
+	@echo "... src/GA_testing/Parent_selector/tournament/tournament_selection_testing.o"
+	@echo "... src/GA_testing/Parent_selector/tournament/tournament_selection_testing.i"
+	@echo "... src/GA_testing/Parent_selector/tournament/tournament_selection_testing.s"
+	@echo "... src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.o"
+	@echo "... src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.i"
+	@echo "... src/GA_testing/Population_selector/elitist_selector/elitist_selector_testing.s"
 	@echo "... src/IO.o"
 	@echo "... src/IO.i"
 	@echo "... src/IO.s"

@@ -78,20 +78,36 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
 
         // Generate the new population by crossover and mutation operations
         for(i=0; i<n_population; i++){
-            // Take a random range to maintain from the first parent
-            int start = rand() % n;
-            int end = start + rand() % (n - start);
-            
-            // Crossover operation to generate a child from parents
-            order_crossover(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n, start, end);
-            
-            // Mutation to the child
-            int s1, s2;
-            s1 = rand() % n;
-            s2 = rand() % n;
-            swap_op(&(child_population.population[i]), i, s1, s2);
+            // Loop until valid child is generated (must be different from other children and actual population members)
+            int equals = 1; // 1 for equals
 
-            // Evaluate the new solution
+            while(equals == 1){
+                equals = 0; // suppose not equals 
+
+                // Take a random range to maintain from the first parent
+                int start = rand() % n;
+                int end = start + rand() % (n - start);
+                
+                // Crossover operation to generate a child from parents
+                order_crossover(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n, start, end);
+                
+                // Mutation to the child
+                int s1, s2;
+                s1 = rand() % n;
+                s2 = rand() % n;
+                swap_op(&(child_population.population[i]), i, s1, s2);
+
+                // Check that generated child is different from other children and actual population members
+                for(j = 0; j<n_population; j++)
+                    equals = check_equals(&(child_population.population[i]), &(population->population[j]), n);
+
+                for(j = 0; j<i; j++)
+                    equals = check_equals(&(child_population.population[i]), &(child_population.population[j]), n);
+
+                // If a member is equal to new child, the next iteration of the while will be executed generating another child
+            }
+
+            // Evaluate the new VALID solution
             LOP_objective_function(&(child_population.population[i]), n);
         }
 

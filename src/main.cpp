@@ -9,6 +9,14 @@
 #include "LOP.hpp"
 #include "IO.hpp"
 
+
+/**
+ * K must be lower than n_population, as the amount of competitors selected from population can not be bigger than the actual
+ * amount of memebers on that population, it is impossible to find enough competitors
+ * 
+ * Being n the amount of elements in a permutation, there are !n possible combinations, so population size must be lower than that
+ */
+
 int main(int argc, char *argv[]){
 
     int *solution = NULL, *matrix = NULL; // solution es la permutación que le corresponde a la solución, matrix su matriz

@@ -46,4 +46,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/main.dir/DependInfo.cmake"
   "CMakeFiles/order_crossover_testing.dir/DependInfo.cmake"
   "CMakeFiles/swap_testing.dir/DependInfo.cmake"
+  "CMakeFiles/tournament_selection_testing.dir/DependInfo.cmake"
+  "CMakeFiles/elitist_selector_testing.dir/DependInfo.cmake"
   )
