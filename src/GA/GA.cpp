@@ -49,51 +49,49 @@ void generate_new_instance(population_t *population, solution_t *init_solution, 
  *  */
 void GA(population_t *population, int n, int n_population){ // pasar operadores de cruce y mutación?
     // Algorithm loop
-    
     int steps = 10000;
     int step = 0;
 
-    int n_parents = 2; // two parents to generate a child
-    int n_generated_childs = 0;
     int i, j, k;
-
-    int *i_parents = (int *)malloc(n_parents * sizeof(int));
+    int n_parents = 2; // two parents to generate a child
     k = 3;
 
-    // n_population must be higher than k
+    // List to store selected parents indexes from population
+    int *i_parents = (int *)malloc(n_parents * sizeof(int));
 
-    // Move the next to function???
+    // Reserve memory for the new population (child)
     population_t child_population;
     reserve_memory_for_population(&child_population, n, n_population);
 
+    // Evaluate all solutions
+    for(i = 0; i<n_population; i++)
+        LOP_objective_function(&(population->population[i]), n);
+
     printf("Starting GA execution\n");
     for(step=0; step<steps; step++){
-        //initialize i_parents
+        // No parents selected yet for this step
         for(i = 0; i<n_parents; i++)
-            i_parents[i] = -1; // no parent selected
+            i_parents[i] = -1; 
 
-        // Select n_parents parents
+        // Select n_parents to be the parents of the next generation
         tournament(i_parents, n_parents, population, k, n);
-        //printf("Tournament passed\n");
 
         // Generate the new population by crossover and mutation operations
         for(i=0; i<n_population; i++){
-            cruce_orden(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n);
-            //printf("%d cruce passed\n", i);
+            // Take a random range to maintain from the first parent
+            int start = rand() % n;
+            int end = start + rand() % (n - start);
             
+            // Crossover operation to generate a child from parents
+            order_crossover(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n, start, end);
+            
+            // Mutation to the child
             int s1, s2;
             s1 = rand() % n;
             s2 = rand() % n;
             swap_op(&(child_population.population[i]), i, s1, s2);
-            //printf("%d swap passed\n", i);
-        }
-        
-        // Compute objective function values
-        for(i = 0; i<n_population; i++){
-            //if(population->population[i].obj_func_computed==0)
-            LOP_objective_function(&(population->population[i]), n);
 
-            //if(child_population.population[i].obj_func_computed==0)
+            // Evaluate the new solution
             LOP_objective_function(&(child_population.population[i]), n);
         }
 
@@ -125,8 +123,11 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
         }
         //printf("\n\n");*/
 
-        // Selection of the new population
+
+        // Select the population for the next generation
         elitist_selection(population, &child_population, n, n_population);
+        
+        
         //printf("Elitism passed\n");
         // Not really necessary
         /*for(i = 0; i<n_population; i++){

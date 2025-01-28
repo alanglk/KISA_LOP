@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <chrono>
-//#include "include/common.hpp"
 
 #include "GA/GA.hpp"
 #include "memory.hpp"
@@ -19,76 +18,14 @@ int main(int argc, char *argv[]){
     solution_t sol;
     population_t population;
 
-
     // read file and load initial solution
     read_file(argv[1], &sol, &n);
     printf("n: %d\n\n", n);
-
-    //print_array(sol.permutation, sol.n);
-    //print_matrix(sol.n, sol.matrix);
-
 
     // Generate new solutions for the population
     printf("Generating new solutions for the initial population\n");
     reserve_memory_for_population(&population, n, n_population);
     generate_new_instance(&population, &sol, sol.n, n_population);
-
-    /*for(int i = 0; i<n_population; i++){
-        print_array(population.population[i].permutation, sol.n);
-        print_matrix(sol.n, population.population[i].matrix);
-        printf("=========\n");
-    }*/
-
-    /* TESTING CUTRE  -->  SWAP WORKS CORRECTLY*/
-    // swap
-    /*print_solution(&sol, n);
-
-    // swap
-    swap_op(&sol, n, 0, 1);
-    print_solution(&sol, n);
-
-    // restore
-    swap_op(&sol, n, 0, 1);
-    print_solution(&sol, n);
-
-    swap_op(&sol, n, 0, 9);
-    print_solution(&sol, n);*/
-
-
-    /* CRUCE ORDEN  --> ORDER CROSSOVER WORKS CORRECTLY*/
-    /*solution_t sol2;
-    reserve_memory_for_solution(&sol2, n);
-
-    // copy sol in sol2
-    for(int i = 0; i<n; i++){
-        sol2.permutation[i] = sol.permutation[i];
-        for(int j=0; j<n; j++)
-            sol2.matrix[i*n+j] = sol.matrix[i*n+j];
-    }
-
-    // swap sol2
-    for(int i = 0; i<200; i++){
-        int s1 = rand() % n;
-        int s2 = rand() % n;
-        swap_op(&sol2, n, s1, s2);
-    }
-
-    // imprime ambas soluciones
-    print_solution(&sol, n);
-    print_solution(&sol2, n);
-
-
-    solution_t child;
-    reserve_memory_for_solution(&child, n);
-
-    for(int i = 0; i<50; i++)
-        cruce_orden(&sol, &sol2, &child, n);
-
-    // print child
-    print_solution(&child, n);*/
-
-
-
 
     auto begin = std::chrono::high_resolution_clock::now();    
     GA(&population, n, n_population);
@@ -96,14 +33,14 @@ int main(int argc, char *argv[]){
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
     printf("Print population\n");
-        for(int i = 0; i<n_population; i++){
-            printf("Solution %d, obj. value %d, permutation: ", i, population.population[i].obj_func_value);
-            for(int j=0; j<n; j++){
-                printf("%d ", population.population[i].permutation[j]);
-            }
-            printf("\n");
+    for(int i = 0; i<n_population; i++){
+        printf("Solution %d, obj. value %d, permutation: ", i, population.population[i].obj_func_value);
+        for(int j=0; j<n; j++){
+            printf("%d ", population.population[i].permutation[j]);
         }
-        printf("\n\n");
+        printf("\n");
+    }
+    printf("\n\n");
 
     printf("Time measured: %.3f seconds.\n", elapsed.count() * 1e-9);
 

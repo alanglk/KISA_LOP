@@ -63,7 +63,9 @@ CMAKE_BINARY_DIR = /home/alejo/Documentos/HB/KISA_LOP
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/programa.dir/all
+all: CMakeFiles/main.dir/all
+all: CMakeFiles/order_crossover_testing.dir/all
+all: CMakeFiles/swap_testing.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +73,88 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/programa.dir/clean
+clean: CMakeFiles/main.dir/clean
+clean: CMakeFiles/order_crossover_testing.dir/clean
+clean: CMakeFiles/swap_testing.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/programa.dir
+# Target rules for target CMakeFiles/main.dir
 
 # All Build rule for target.
-CMakeFiles/programa.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target programa"
-.PHONY : CMakeFiles/programa.dir/all
+CMakeFiles/main.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target main"
+.PHONY : CMakeFiles/main.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/programa.dir/rule: cmake_check_build_system
+CMakeFiles/main.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles 10
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/programa.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles 0
-.PHONY : CMakeFiles/programa.dir/rule
+.PHONY : CMakeFiles/main.dir/rule
 
 # Convenience name for target.
-programa: CMakeFiles/programa.dir/rule
-.PHONY : programa
+main: CMakeFiles/main.dir/rule
+.PHONY : main
 
 # clean rule for target.
-CMakeFiles/programa.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/clean
-.PHONY : CMakeFiles/programa.dir/clean
+CMakeFiles/main.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
+.PHONY : CMakeFiles/main.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/order_crossover_testing.dir
+
+# All Build rule for target.
+CMakeFiles/order_crossover_testing.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles --progress-num=11,12,13,14,15,16,17,18,19,20 "Built target order_crossover_testing"
+.PHONY : CMakeFiles/order_crossover_testing.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/order_crossover_testing.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles 10
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/order_crossover_testing.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles 0
+.PHONY : CMakeFiles/order_crossover_testing.dir/rule
+
+# Convenience name for target.
+order_crossover_testing: CMakeFiles/order_crossover_testing.dir/rule
+.PHONY : order_crossover_testing
+
+# clean rule for target.
+CMakeFiles/order_crossover_testing.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/clean
+.PHONY : CMakeFiles/order_crossover_testing.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/swap_testing.dir
+
+# All Build rule for target.
+CMakeFiles/swap_testing.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles --progress-num=21,22,23,24,25,26,27,28,29,30 "Built target swap_testing"
+.PHONY : CMakeFiles/swap_testing.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/swap_testing.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles 10
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/swap_testing.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alejo/Documentos/HB/KISA_LOP/CMakeFiles 0
+.PHONY : CMakeFiles/swap_testing.dir/rule
+
+# Convenience name for target.
+swap_testing: CMakeFiles/swap_testing.dir/rule
+.PHONY : swap_testing
+
+# clean rule for target.
+CMakeFiles/swap_testing.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/clean
+.PHONY : CMakeFiles/swap_testing.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

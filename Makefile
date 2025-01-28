@@ -117,24 +117,52 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named programa
+# Target rules for targets named main
 
 # Build rule for target.
-programa: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 programa
-.PHONY : programa
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-programa/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/build
-.PHONY : programa/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+#=============================================================================
+# Target rules for targets named order_crossover_testing
+
+# Build rule for target.
+order_crossover_testing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 order_crossover_testing
+.PHONY : order_crossover_testing
+
+# fast build rule for target.
+order_crossover_testing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/build
+.PHONY : order_crossover_testing/fast
+
+#=============================================================================
+# Target rules for targets named swap_testing
+
+# Build rule for target.
+swap_testing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 swap_testing
+.PHONY : swap_testing
+
+# fast build rule for target.
+swap_testing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/build
+.PHONY : swap_testing/fast
 
 src/GA/GA.o: src/GA/GA.cpp.o
 .PHONY : src/GA/GA.o
 
 # target to build an object file
 src/GA/GA.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/GA.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/GA.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/GA.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/GA.cpp.o
 .PHONY : src/GA/GA.cpp.o
 
 src/GA/GA.i: src/GA/GA.cpp.i
@@ -142,7 +170,9 @@ src/GA/GA.i: src/GA/GA.cpp.i
 
 # target to preprocess a source file
 src/GA/GA.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/GA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/GA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/GA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/GA.cpp.i
 .PHONY : src/GA/GA.cpp.i
 
 src/GA/GA.s: src/GA/GA.cpp.s
@@ -150,7 +180,9 @@ src/GA/GA.s: src/GA/GA.cpp.s
 
 # target to generate assembly for a file
 src/GA/GA.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/GA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/GA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/GA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/GA.cpp.s
 .PHONY : src/GA/GA.cpp.s
 
 src/GA/crossover.o: src/GA/crossover.cpp.o
@@ -158,7 +190,9 @@ src/GA/crossover.o: src/GA/crossover.cpp.o
 
 # target to build an object file
 src/GA/crossover.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/crossover.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/crossover.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/crossover.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/crossover.cpp.o
 .PHONY : src/GA/crossover.cpp.o
 
 src/GA/crossover.i: src/GA/crossover.cpp.i
@@ -166,7 +200,9 @@ src/GA/crossover.i: src/GA/crossover.cpp.i
 
 # target to preprocess a source file
 src/GA/crossover.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/crossover.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/crossover.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/crossover.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/crossover.cpp.i
 .PHONY : src/GA/crossover.cpp.i
 
 src/GA/crossover.s: src/GA/crossover.cpp.s
@@ -174,7 +210,9 @@ src/GA/crossover.s: src/GA/crossover.cpp.s
 
 # target to generate assembly for a file
 src/GA/crossover.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/crossover.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/crossover.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/crossover.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/crossover.cpp.s
 .PHONY : src/GA/crossover.cpp.s
 
 src/GA/mutation.o: src/GA/mutation.cpp.o
@@ -182,7 +220,9 @@ src/GA/mutation.o: src/GA/mutation.cpp.o
 
 # target to build an object file
 src/GA/mutation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/mutation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/mutation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/mutation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/mutation.cpp.o
 .PHONY : src/GA/mutation.cpp.o
 
 src/GA/mutation.i: src/GA/mutation.cpp.i
@@ -190,7 +230,9 @@ src/GA/mutation.i: src/GA/mutation.cpp.i
 
 # target to preprocess a source file
 src/GA/mutation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/mutation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/mutation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/mutation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/mutation.cpp.i
 .PHONY : src/GA/mutation.cpp.i
 
 src/GA/mutation.s: src/GA/mutation.cpp.s
@@ -198,7 +240,9 @@ src/GA/mutation.s: src/GA/mutation.cpp.s
 
 # target to generate assembly for a file
 src/GA/mutation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/mutation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/mutation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/mutation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/mutation.cpp.s
 .PHONY : src/GA/mutation.cpp.s
 
 src/GA/parent_selection.o: src/GA/parent_selection.cpp.o
@@ -206,7 +250,9 @@ src/GA/parent_selection.o: src/GA/parent_selection.cpp.o
 
 # target to build an object file
 src/GA/parent_selection.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/parent_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/parent_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/parent_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/parent_selection.cpp.o
 .PHONY : src/GA/parent_selection.cpp.o
 
 src/GA/parent_selection.i: src/GA/parent_selection.cpp.i
@@ -214,7 +260,9 @@ src/GA/parent_selection.i: src/GA/parent_selection.cpp.i
 
 # target to preprocess a source file
 src/GA/parent_selection.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/parent_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/parent_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/parent_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/parent_selection.cpp.i
 .PHONY : src/GA/parent_selection.cpp.i
 
 src/GA/parent_selection.s: src/GA/parent_selection.cpp.s
@@ -222,7 +270,9 @@ src/GA/parent_selection.s: src/GA/parent_selection.cpp.s
 
 # target to generate assembly for a file
 src/GA/parent_selection.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/parent_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/parent_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/parent_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/parent_selection.cpp.s
 .PHONY : src/GA/parent_selection.cpp.s
 
 src/GA/population_selection.o: src/GA/population_selection.cpp.o
@@ -230,7 +280,9 @@ src/GA/population_selection.o: src/GA/population_selection.cpp.o
 
 # target to build an object file
 src/GA/population_selection.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/population_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/population_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/population_selection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/population_selection.cpp.o
 .PHONY : src/GA/population_selection.cpp.o
 
 src/GA/population_selection.i: src/GA/population_selection.cpp.i
@@ -238,7 +290,9 @@ src/GA/population_selection.i: src/GA/population_selection.cpp.i
 
 # target to preprocess a source file
 src/GA/population_selection.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/population_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/population_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/population_selection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/population_selection.cpp.i
 .PHONY : src/GA/population_selection.cpp.i
 
 src/GA/population_selection.s: src/GA/population_selection.cpp.s
@@ -246,15 +300,67 @@ src/GA/population_selection.s: src/GA/population_selection.cpp.s
 
 # target to generate assembly for a file
 src/GA/population_selection.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/GA/population_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GA/population_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA/population_selection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA/population_selection.cpp.s
 .PHONY : src/GA/population_selection.cpp.s
+
+src/GA_testing/Crossover/order_crossover_testing.o: src/GA_testing/Crossover/order_crossover_testing.cpp.o
+.PHONY : src/GA_testing/Crossover/order_crossover_testing.o
+
+# target to build an object file
+src/GA_testing/Crossover/order_crossover_testing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA_testing/Crossover/order_crossover_testing.cpp.o
+.PHONY : src/GA_testing/Crossover/order_crossover_testing.cpp.o
+
+src/GA_testing/Crossover/order_crossover_testing.i: src/GA_testing/Crossover/order_crossover_testing.cpp.i
+.PHONY : src/GA_testing/Crossover/order_crossover_testing.i
+
+# target to preprocess a source file
+src/GA_testing/Crossover/order_crossover_testing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA_testing/Crossover/order_crossover_testing.cpp.i
+.PHONY : src/GA_testing/Crossover/order_crossover_testing.cpp.i
+
+src/GA_testing/Crossover/order_crossover_testing.s: src/GA_testing/Crossover/order_crossover_testing.cpp.s
+.PHONY : src/GA_testing/Crossover/order_crossover_testing.s
+
+# target to generate assembly for a file
+src/GA_testing/Crossover/order_crossover_testing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/GA_testing/Crossover/order_crossover_testing.cpp.s
+.PHONY : src/GA_testing/Crossover/order_crossover_testing.cpp.s
+
+src/GA_testing/Mutation/swap_testing.o: src/GA_testing/Mutation/swap_testing.cpp.o
+.PHONY : src/GA_testing/Mutation/swap_testing.o
+
+# target to build an object file
+src/GA_testing/Mutation/swap_testing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA_testing/Mutation/swap_testing.cpp.o
+.PHONY : src/GA_testing/Mutation/swap_testing.cpp.o
+
+src/GA_testing/Mutation/swap_testing.i: src/GA_testing/Mutation/swap_testing.cpp.i
+.PHONY : src/GA_testing/Mutation/swap_testing.i
+
+# target to preprocess a source file
+src/GA_testing/Mutation/swap_testing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA_testing/Mutation/swap_testing.cpp.i
+.PHONY : src/GA_testing/Mutation/swap_testing.cpp.i
+
+src/GA_testing/Mutation/swap_testing.s: src/GA_testing/Mutation/swap_testing.cpp.s
+.PHONY : src/GA_testing/Mutation/swap_testing.s
+
+# target to generate assembly for a file
+src/GA_testing/Mutation/swap_testing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/GA_testing/Mutation/swap_testing.cpp.s
+.PHONY : src/GA_testing/Mutation/swap_testing.cpp.s
 
 src/IO.o: src/IO.cpp.o
 .PHONY : src/IO.o
 
 # target to build an object file
 src/IO.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/IO.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/IO.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/IO.cpp.o
 .PHONY : src/IO.cpp.o
 
 src/IO.i: src/IO.cpp.i
@@ -262,7 +368,9 @@ src/IO.i: src/IO.cpp.i
 
 # target to preprocess a source file
 src/IO.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/IO.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/IO.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/IO.cpp.i
 .PHONY : src/IO.cpp.i
 
 src/IO.s: src/IO.cpp.s
@@ -270,7 +378,9 @@ src/IO.s: src/IO.cpp.s
 
 # target to generate assembly for a file
 src/IO.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/IO.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/IO.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/IO.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/IO.cpp.s
 .PHONY : src/IO.cpp.s
 
 src/LOP.o: src/LOP.cpp.o
@@ -278,7 +388,9 @@ src/LOP.o: src/LOP.cpp.o
 
 # target to build an object file
 src/LOP.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/LOP.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LOP.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/LOP.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/LOP.cpp.o
 .PHONY : src/LOP.cpp.o
 
 src/LOP.i: src/LOP.cpp.i
@@ -286,7 +398,9 @@ src/LOP.i: src/LOP.cpp.i
 
 # target to preprocess a source file
 src/LOP.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/LOP.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LOP.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/LOP.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/LOP.cpp.i
 .PHONY : src/LOP.cpp.i
 
 src/LOP.s: src/LOP.cpp.s
@@ -294,7 +408,9 @@ src/LOP.s: src/LOP.cpp.s
 
 # target to generate assembly for a file
 src/LOP.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/LOP.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LOP.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/LOP.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/LOP.cpp.s
 .PHONY : src/LOP.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -302,7 +418,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -310,7 +426,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -318,7 +434,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/memory.o: src/memory.cpp.o
@@ -326,7 +442,9 @@ src/memory.o: src/memory.cpp.o
 
 # target to build an object file
 src/memory.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/memory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/memory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/memory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/memory.cpp.o
 .PHONY : src/memory.cpp.o
 
 src/memory.i: src/memory.cpp.i
@@ -334,7 +452,9 @@ src/memory.i: src/memory.cpp.i
 
 # target to preprocess a source file
 src/memory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/memory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/memory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/memory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/memory.cpp.i
 .PHONY : src/memory.cpp.i
 
 src/memory.s: src/memory.cpp.s
@@ -342,7 +462,9 @@ src/memory.s: src/memory.cpp.s
 
 # target to generate assembly for a file
 src/memory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/programa.dir/build.make CMakeFiles/programa.dir/src/memory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/memory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/order_crossover_testing.dir/build.make CMakeFiles/order_crossover_testing.dir/src/memory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/swap_testing.dir/build.make CMakeFiles/swap_testing.dir/src/memory.cpp.s
 .PHONY : src/memory.cpp.s
 
 # Help Target
@@ -353,7 +475,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... programa"
+	@echo "... main"
+	@echo "... order_crossover_testing"
+	@echo "... swap_testing"
 	@echo "... src/GA/GA.o"
 	@echo "... src/GA/GA.i"
 	@echo "... src/GA/GA.s"
@@ -369,6 +493,12 @@ help:
 	@echo "... src/GA/population_selection.o"
 	@echo "... src/GA/population_selection.i"
 	@echo "... src/GA/population_selection.s"
+	@echo "... src/GA_testing/Crossover/order_crossover_testing.o"
+	@echo "... src/GA_testing/Crossover/order_crossover_testing.i"
+	@echo "... src/GA_testing/Crossover/order_crossover_testing.s"
+	@echo "... src/GA_testing/Mutation/swap_testing.o"
+	@echo "... src/GA_testing/Mutation/swap_testing.i"
+	@echo "... src/GA_testing/Mutation/swap_testing.s"
 	@echo "... src/IO.o"
 	@echo "... src/IO.i"
 	@echo "... src/IO.s"

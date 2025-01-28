@@ -4,7 +4,7 @@
 #include <memory>
 #include <stdio.h>
 
-/// @brief Reserve memory for each solution
+/// @brief Reserve memory for each solution and initialize values
 /// @param solution Solution pointer to reserve memory
 /// @param n Number of elements
 void reserve_memory_for_solution(solution_t *solution, int n){

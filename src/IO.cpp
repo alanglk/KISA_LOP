@@ -15,7 +15,7 @@ int read_file(const char *file_name, solution_t *sol, int *n){
         perror("Error opening the file\n");
         return 1;
     } 
-    printf("File oppened!\n");
+    //printf("File oppened!\n");
 
     // read n value
     fscanf(f, "%d", n);
@@ -29,6 +29,36 @@ int read_file(const char *file_name, solution_t *sol, int *n){
         for(int j= 0; j<sol->n; j++)
             fscanf(f, "%d", &(sol->matrix[i*(*n)+j]));
     }
+
+    return 0;
+}
+
+/// @brief Read file with matrix and permutation
+/// @param file_name File name to read
+/// @param sol Solution pointer to initialize
+/// @param n Number of elements
+/// @return 
+int read_file_with_permutation(const char *file_name, solution_t *sol, int *n){
+    FILE *f = fopen(file_name, "r");
+        if (f == NULL){
+        perror("Error opening the file\n");
+        return 1;
+    } 
+
+    // Read n value
+    fscanf(f, "%d", n);
+
+    // Reserve memory for the solution
+    reserve_memory_for_solution(sol, (*n));
+
+    // Read permutation
+    for(int i = 0; i<sol->n; i++)
+        fscanf(f, "%d", &(sol->permutation[i]));
+
+    // Read  matrix
+    for(int i = 0; i<sol->n; i++)
+        for(int j= 0; j<sol->n; j++)
+            fscanf(f, "%d", &(sol->matrix[i*(*n)+j]));
 
     return 0;
 }
@@ -60,8 +90,10 @@ void print_array(int *array, int n){
 /// @param solution Solution to print
 /// @param n Number of elements
 void print_solution(solution_t *solution, int n){
-    printf("============\nPrinting solution.\n");
+    printf("============\n\nPrinting solution.\n");
+    printf("Obj. value = %d, permutation: ", solution->obj_func_value);
     print_array(solution->permutation, n);
+    printf("Printing matrix...\n");
     print_matrix(n, solution->matrix);
 }
 

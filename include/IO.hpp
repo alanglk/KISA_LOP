@@ -9,6 +9,15 @@
 /// @return 0 if all gone well, otherwise 1
 int read_file(const char *file_name, solution_t *sol, int *n);
 
+
+/// @brief Read file with matrix and permutation
+/// @param file_name File name to read
+/// @param sol Solution pointer to initialize
+/// @param n Number of elements
+/// @return 
+int read_file_with_permutation(const char *file_name, solution_t *sol, int *n);
+
+
 /// @brief Print matrix
 /// @param n Number of rows and columns
 /// @param matrix Matrix to print

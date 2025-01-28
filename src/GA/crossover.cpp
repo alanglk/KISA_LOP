@@ -15,9 +15,10 @@
 /// @param parent2 The second parent to generate the child
 /// @param child Child generated from both parents
 /// @param n Number of elements
-void cruce_orden(solution_t *parent1, solution_t *parent2, solution_t *child, int n){
-    int i, j, z;
-    int start, end;
+/// @param start Start index to maintain from parent1
+/// @param end End index to maitain from parent1
+void order_crossover(solution_t *parent1, solution_t *parent2, solution_t *child, int n, int start, int end){
+    int i, j;
 
     // Initialize child permutation and matrix
     for (i = 0; i < n; i++){
@@ -26,11 +27,7 @@ void cruce_orden(solution_t *parent1, solution_t *parent2, solution_t *child, in
             child->matrix[i*n+j] = parent1->matrix[i*n+j]; // Initialize matrix with parent1 values (then execute swaps)
     }
 
-    // Take a random range to maintain from the first parent
-    start = rand() % n;
-    end = start + rand() % (n - start);
-
-    // Copy the range on the child
+    // Copy the range on the childs permutation
     for(i=start; i<=end; i++)
         child->permutation[i] = parent1->permutation[i];
 
@@ -53,25 +50,26 @@ void cruce_orden(solution_t *parent1, solution_t *parent2, solution_t *child, in
         }
     }
 
+    // Now make the necessary swaps on matrix of child, using parent1 copy to know what swaps must be done
     // Generate parent1 copy
     solution_t parent1_copy;
     reserve_memory_for_solution(&parent1_copy, n);
-
-    // Generate the child matrix running swap operations on parent1
-    // Copy parent 1
     copy_solution(&parent1_copy, parent1, n);
 
     // Swap matrix on child finding differences from parent1
-    for(i=0; i<n; i++)
+    for(i=0; i<n; i++) {
         // if there is a difference between parent and child swap
-        if(parent1_copy.permutation[(end + 1 + i) % n] != child->permutation[(end + 1 + i) % n]) // find the value of the child on parent and swap
-            for(j=0; j<n; j++)
+        if(parent1_copy.permutation[(end + 1 + i) % n] != child->permutation[(end + 1 + i) % n]) { // find the value of the child on parent and swap
+            for(j=0; j<n; j++){
                 if(parent1_copy.permutation[j] == child->permutation[(end+1+i)%n]){
-                    //printf("Difference founded on parent (%d) and child (%d)\n", j, (end+i+1)%n);
                     swap_op(&parent1_copy, n, j, (end+1+i)%n);
                     swap_matrix(child, n, j, (end+1+i)%n);
                 }
+            }
+        }
+    }
 
+    // free memory occuped by parent1 copy
     free(parent1_copy.matrix);
     free(parent1_copy.permutation);
 }
