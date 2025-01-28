@@ -1,14 +1,6 @@
 #ifndef LOP_HPP
 #define LOP_HPP
 
-#include <iostream>
-#include <memory>
-#include <stdio.h>
-#include <string.h>
-#include <chrono>
-
-#include "include/memory.hpp"
-
 typedef struct {
     int *permutation;
     int *matrix;

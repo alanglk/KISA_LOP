@@ -1,6 +1,10 @@
-#include "include/GA/crossover.hpp"
-#include "include/memory.hpp"
-#include "include/GA/mutation.hpp"
+#include "GA/crossover.hpp"
+#include "memory.hpp"
+#include "GA/mutation.hpp"
+
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /**
  * Operadores de Cruce (crossover operators)

@@ -1,6 +1,9 @@
-#include "include/IO.hpp"
-#include "include/memory.hpp"
+#include "IO.hpp"
+#include "memory.hpp"
 
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /// @brief Read file and load it into a solution_t struct
 /// @param file_name File to read

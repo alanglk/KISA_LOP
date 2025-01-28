@@ -1,5 +1,13 @@
-#include "include/GA/GA.hpp"
+#include "GA/GA.hpp"
+#include "GA/mutation.hpp"
+#include "GA/crossover.hpp"
+#include "GA/parent_selection.hpp"
+#include "GA/population_selection.hpp"
+#include "memory.hpp"
 
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /// @brief Generates a new instance from the actual instance
 /// @param population Population of solutions to store generated solutions

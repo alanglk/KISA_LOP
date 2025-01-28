@@ -1,7 +1,7 @@
 #ifndef MUTATION_HPP
 #define MUTATION_HPP
 
-#include "include/LOP.hpp"
+#include "LOP.hpp"
 
 /// @brief Swap values on permutation of solution_t. Cost O(1)
 /// @param solution Solution_t structure with the permutation

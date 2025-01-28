@@ -1,8 +1,7 @@
 #ifndef IO_HPP
 #define IO_HPP
 
-#include "include/LOP.hpp"
-#include "include/memory.hpp"
+#include "LOP.hpp"
 
 /// @brief Read file and load it into a solution_t struct
 /// @param file_name File to read

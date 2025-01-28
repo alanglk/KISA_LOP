@@ -1,12 +1,7 @@
 #ifndef GA_HP
 #define GA_HPP
 
-#include "include/LOP.hpp"
-#include "mutation.hpp"
-#include "parent_selection.hpp"
-#include "crossover.hpp"
-#include "population_selection.hpp"
-#include "memory.hpp"
+#include "LOP.hpp"
 
 /// @brief Generates a population by generating new instances from the actual instance
 /// @param population Population of solutions to store generated solutions

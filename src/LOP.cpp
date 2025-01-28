@@ -1,5 +1,9 @@
-#include "include/LOP.hpp"
-#include "include/memory.hpp"
+#include "LOP.hpp"
+#include "memory.hpp"
+
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /// @brief Copies a solution into another one
 /// @param solution1 Solution in which to copy the solution

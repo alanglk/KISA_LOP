@@ -1,7 +1,7 @@
 #ifndef PARENT_SELECTION_HPP
 #define PARENT_SELECTION_HPP
 
-#include "include/LOP.hpp"
+#include "LOP.hpp"
 
 /**
  * Selection functions

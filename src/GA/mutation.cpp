@@ -1,4 +1,8 @@
-#include "include/GA/mutation.hpp"
+#include "GA/mutation.hpp"
+
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /// @brief Swap values on permutation of solution_t. Cost O(1)
 /// @param solution Solution_t structure with the permutation

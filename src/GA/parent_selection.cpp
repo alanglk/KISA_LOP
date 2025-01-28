@@ -1,4 +1,8 @@
-#include "include/GA/parent_selection.hpp"
+#include "GA/parent_selection.hpp"
+
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /**
  * Selection functions

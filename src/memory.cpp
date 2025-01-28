@@ -1,4 +1,8 @@
-#include "../include/memory.hpp"
+#include "memory.hpp"
+
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 /// @brief Reserve memory for each solution
 /// @param solution Solution pointer to reserve memory

@@ -1,4 +1,8 @@
-#include "include/GA/population_selection.hpp"
+#include "GA/population_selection.hpp"
+
+#include <iostream>
+#include <memory>
+#include <stdio.h>
 
 
 /** SELECTION FUNCTIONS */

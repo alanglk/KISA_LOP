@@ -1,0 +1,3 @@
+/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/programa.dir
+/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/edit_cache.dir
+/home/alejo/Documentos/HB/KISA_LOP/CMakeFiles/rebuild_cache.dir
