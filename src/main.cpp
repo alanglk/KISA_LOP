@@ -5,7 +5,6 @@
 #include <chrono>
 #include "include/common.hpp"
 
-
 typedef struct {
     int *permutation;
     int *matrix;
@@ -52,6 +51,11 @@ void reserve_memory_for_population(population_t *population, int n, int n_popula
         reserve_memory_for_solution(&(population->population[i]), n);
 }
 
+
+/// @brief Copies a solution into another one
+/// @param solution1 Solution in which to copy the solution
+/// @param solution2 Solution to copy in another
+/// @param n Number of elements
 void copy_solution(solution_t *solution1, solution_t *solution2, int n){
     for(int i = 0; i<n; i++){
         solution1->permutation[i] = solution2->permutation[i];
@@ -63,6 +67,10 @@ void copy_solution(solution_t *solution1, solution_t *solution2, int n){
     solution1->obj_func_value = solution2->obj_func_value;
 }
 
+/// @brief Exchange two solutions
+/// @param solution1 Solution1 to move to solution2
+/// @param solution2 Solution2 to move to solution 1
+/// @param n Number of elements
 void exchange_solutions(solution_t *solution1, solution_t *solution2, int n){
     solution_t temp_solution;
     reserve_memory_for_solution(&temp_solution, n);
@@ -75,6 +83,17 @@ void exchange_solutions(solution_t *solution1, solution_t *solution2, int n){
     free(temp_solution.permutation);
 }
 
+/// @brief Compare permutations of solutions to evaluate if both solution are equals
+/// @param sol1 First solution to compare
+/// @param sol2 Second solution to compare
+/// @param n Number of elements
+/// @return If solutions are equals
+int check_equals(solution_t *sol1, solution_t *sol2, int n){
+    for(int i = 0; i<n; i++)
+        if(sol1->permutation[i] != sol2->permutation[i])
+            return 0; // not equals
+    return 1; // equals
+}
 
 /// @brief Read file and load it into a solution_t struct
 /// @param file_name File to read
@@ -210,6 +229,7 @@ void swap_op(solution_t *solution, int n, int s1, int s2){
     swap_matrix(solution, n, s1, s2);
 }
 
+
 /// @brief Generates a new instance from the actual instance
 /// @param population Population of solutions to store generated solutions
 /// @param init_solution Initial solution to generate the new ones
@@ -228,10 +248,18 @@ void generate_new_instance(population_t *population, solution_t *init_solution, 
         // Generate new solution by first copying actual and then making changes (n*10 swaps)
         copy_solution(&(population->population[i]), init_solution, n); // copy actual solution
         
-        for(j=0; j<(n*125); j++){
-            index1 = rand() % n;
-            index2 = rand() % n;
-            swap_op(&(population->population[i]), n, index1, index2);
+        int equals = 1;
+        // Loop if new solution is equal to the initial
+        while(equals == 1){
+            // Make changes
+            for(j=0; j<(n*125); j++){
+                index1 = rand() % n;
+                index2 = rand() % n;
+                swap_op(&(population->population[i]), n, index1, index2);
+            }
+
+            // if the generated new solution is equal to the original one, repeat the process
+            equals = check_equals(&(population->population[i]), init_solution, n);
         }
     }
 }
@@ -442,7 +470,7 @@ void elitist_selection(population_t *population, population_t *new_population, i
 void GA(population_t *population, int n, int n_population){ // pasar operadores de cruce y mutación?
     // Algorithm loop
     
-    int steps = 10;
+    int steps = 10000;
     int step = 0;
 
     int n_parents = 2; // two parents to generate a child
@@ -466,30 +494,30 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
 
         // Select n_parents parents
         tournament(i_parents, n_parents, population, k, n);
-        printf("Tournament passed\n");
+        //printf("Tournament passed\n");
 
         // Generate the new population by crossover and mutation operations
         for(i=0; i<n_population; i++){
             cruce_orden(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n);
-            printf("%d cruce passed\n", i);
+            //printf("%d cruce passed\n", i);
             
             int s1, s2;
             s1 = rand() % n;
             s2 = rand() % n;
             swap_op(&(child_population.population[i]), i, s1, s2);
-            printf("%d swap passed\n", i);
+            //printf("%d swap passed\n", i);
         }
         
         // Compute objective function values
         for(i = 0; i<n_population; i++){
             //if(population->population[i].obj_func_computed==0)
-                LOP_objective_function(&(population->population[i]), n);
+            LOP_objective_function(&(population->population[i]), n);
 
             //if(child_population.population[i].obj_func_computed==0)
-                LOP_objective_function(&(child_population.population[i]), n);
+            LOP_objective_function(&(child_population.population[i]), n);
         }
 
-        print_results(population, n_population, step);
+        /*print_results(population, n_population, step);
 
         printf("=================\n=================\n");
         printf("Print population\n");
@@ -499,13 +527,13 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
                 printf("%d ", population->population[i].permutation[j]);
             }
             printf("\n");
-        }
+        }*/
 
         /*for(i = 0; i<n_population; i++){
             print_matrix(n, population->population[i].matrix);
         }*/
 
-        printf("\n\n");
+        /*printf("\n\n");
         
         printf("Print child population\n");
         for(i = 0; i<n_population; i++){
@@ -515,18 +543,18 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
             }
             printf("\n");
         }
-        //printf("\n\n");
+        //printf("\n\n");*/
 
         // Selection of the new population
         elitist_selection(population, &child_population, n, n_population);
-        printf("Elitism passed\n");
+        //printf("Elitism passed\n");
         // Not really necessary
         /*for(i = 0; i<n_population; i++){
             if(population->population[i].obj_func_computed==0)
                 LOP_objective_function(&(population->population[i]), n);
         }*/
 
-        printf("=================\n");
+        /*printf("=================\n");
 
         
         printf("Print population\n");
@@ -549,7 +577,7 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
         }
         printf("\n\n");
 
-        printf("=================\n=================\n");
+        printf("=================\n=================\n");*/
         /*if(step % 10 == 0){
             printf("Solutions in step %d: ", step);
             for(i = 0; i<n_population; i++)
@@ -644,6 +672,16 @@ int main(int argc, char *argv[]){
     GA(&population, n, n_population);
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+
+    printf("Print population\n");
+        for(int i = 0; i<n_population; i++){
+            printf("Solution %d, obj. value %d, permutation: ", i, population.population[i].obj_func_value);
+            for(int j=0; j<n; j++){
+                printf("%d ", population.population[i].permutation[j]);
+            }
+            printf("\n");
+        }
+        printf("\n\n");
 
     printf("Time measured: %.3f seconds.\n", elapsed.count() * 1e-9);
 
