@@ -61,6 +61,8 @@ void LOP_objective_function(solution_t *sol, int n){
 }
 
 int factorial(int n){
+    if (n <= 0)
+        return 1; 
     return n * (factorial(n-1));
 }
 
@@ -74,4 +76,35 @@ void evaluate_all_solutions(solution_t *init_sol, int n){
     for(int i = 0; i<n; i++){
         
     }
+}
+
+
+std::ostream& operator<<(std::ostream& out, const solution_t& s) {
+    // Print N
+    out << "N: " << s.n << std::endl;
+
+    // Print permutation
+    out << "S: [";
+    if (s.permutation) {
+        for (int i = 0; i < s.n; i++) {
+            out << s.permutation[i];
+            if (i < s.n - 1)
+                out << ", ";
+        }
+    }
+    out << "]" << std::endl;
+
+    // Print Matrix
+    // if (s.matrix) {
+    //     for (int i = 0; i < s.n; i++) {
+    //         for (int j = 0; j < s.n; j++) {
+    //             out << s.matrix[i * s.n + j] << ' ';
+    //         }
+    //         out << std::endl;
+    //     }
+    // } else {
+    //     out << "Matrix is null." << std::endl;
+    // }
+
+    return out;
 }

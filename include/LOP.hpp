@@ -1,6 +1,8 @@
 #ifndef LOP_HPP
 #define LOP_HPP
 
+#include <ostream>
+
 typedef struct {
     int *permutation;
     int *matrix;
@@ -45,5 +47,7 @@ int check_equals(solution_t *sol1, solution_t *sol2, int n);
 /// @param n Number of elements
 void LOP_objective_function(solution_t *sol, int n);
 
+/// @brief sysout overloading
+std::ostream& operator<<(std::ostream& out, const solution_t& s);
 
 #endif
