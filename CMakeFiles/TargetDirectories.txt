@@ -1,8 +1,0 @@
-/home/ag6154lk/KISA_LOP/CMakeFiles/SA_main.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/main.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/order_crossover_testing.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/swap_testing.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/tournament_selection_testing.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/elitist_selector_testing.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/edit_cache.dir
-/home/ag6154lk/KISA_LOP/CMakeFiles/rebuild_cache.dir

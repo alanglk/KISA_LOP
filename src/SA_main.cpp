@@ -155,6 +155,5 @@ int main(int argc, char *argv[]){
     SimulatedAnnealing SA = {10000, 0.2, 100, 100, LINEAR};
     SA.run(solution);
 
-
     return 0;
 }
