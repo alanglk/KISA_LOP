@@ -13,6 +13,6 @@ void generate_new_instance(population_t *population, solution_t *init_solution, 
 /**
  * GENETIC ALGORITHM CODE
  *  */
-void GA(population_t *population, int n, int n_population);
+void GA(population_t *population, int n, int n_population, int steps);
 
 #endif

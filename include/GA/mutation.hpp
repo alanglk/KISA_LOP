@@ -3,7 +3,7 @@
 
 #include "LOP.hpp"
 
-/// @brief Swap values on permutation of solution_t. Cost O(1)
+/*/// @brief Swap values on permutation of solution_t. Cost O(1)
 /// @param solution Solution_t structure with the permutation
 /// @param n Number of elements
 /// @param s1 First index to swap
@@ -22,7 +22,7 @@ void swap_matrix(solution_t *solution, int n, int s1, int s2);
 /// @param n Number of elements
 /// @param s1 First index to swap with
 /// @param s2 Second index to swap with
-void swap_op(solution_t *solution, int n, int s1, int s2);
+void swap_op(solution_t *solution, int n, int s1, int s2);*/
 
 
 #endif
