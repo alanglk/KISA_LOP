@@ -132,35 +132,3 @@ void swap_op(solution_t *solution, int n, int s1, int s2){
     // swap the matrix
     swap_matrix(solution, n, s1, s2);
 }
-
-
-std::ostream& operator<<(std::ostream& out, const solution_t& s) {
-    // Print N
-    out << "N: " << s.n << std::endl;
-
-    // Print permutation
-    out << "S: [";
-    if (s.permutation) {
-        for (int i = 0; i < s.n; i++) {
-            out << s.permutation[i];
-            if (i < s.n - 1)
-                out << ", ";
-        }
-    }
-    out << "]" << std::endl;
-
-    // Print Matrix
-    // if (s.matrix) {
-    //     for (int i = 0; i < s.n; i++) {
-    //         for (int j = 0; j < s.n; j++) {
-    //             out << s.matrix[i * s.n + j] << ' ';
-    //         }
-    //         out << std::endl;
-    //     }
-    // } else {
-    //     out << "Matrix is null." << std::endl;
-    // }
-
-    return out;
-}
-
