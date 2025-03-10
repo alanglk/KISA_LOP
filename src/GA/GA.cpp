@@ -103,7 +103,7 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
                 int s1, s2;
 
                 // if indexes to swap are the same make a small change
-                int n_swaps = rand() % (n/4);
+                int n_swaps = rand() % (n);
                 //n_swaps += (n/4);
                 for(j = 0; j<n_swaps; j++){
                     s1 = rand() % n;
