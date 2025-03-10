@@ -53,14 +53,13 @@ void generate_new_instance(population_t *population, solution_t *init_solution, 
 /**
  * GENETIC ALGORITHM CODE
  *  */
-void GA(population_t *population, int n, int n_population){ // pasar operadores de cruce y mutación?
+void GA(population_t *population, int n, int n_population, int steps){ // pasar operadores de cruce y mutación?
     // Algorithm loop
-    int steps = 100000;
     int step = 0;
 
     int i, j, k;
     int n_parents = 2; // two parents to generate a child
-    k = 50;
+    k = int(n_population/4); // amount of competitors to be the parent
 
     // List to store selected parents indexes from population
     int *i_parents = (int *)malloc(n_parents * sizeof(int));
@@ -73,7 +72,7 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
     for(i = 0; i<n_population; i++)
         LOP_objective_function(&(population->population[i]), n);
 
-    printf("Starting GA execution\n");
+    //printf("Starting GA execution\n");
     for(step=0; step<steps; step++){
 
         // No parents selected yet for this step
@@ -98,7 +97,8 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
                 
                 // Crossover operation to generate a child from parents
                 order_crossover(&(population->population[i_parents[0]]), &(population->population[i_parents[1]]), &(child_population.population[i]), n, start, end);
-                //printf("Order finisged\n");
+                //printf("Crossover finished\n");
+                
                 // Mutation to the child
                 int s1, s2;
 
@@ -167,7 +167,7 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
 
         // Select the population for the next generation
         elitist_selection(population, &child_population, n, n_population);
-        
+        //random_selection(population, &child_population, n, n_population);
         
         //printf("Elitism passed\n");
         // Not really necessary
@@ -204,7 +204,7 @@ void GA(population_t *population, int n, int n_population){ // pasar operadores 
             printf("Solutions in step %d: \n", step);
             for(i = 0; i<n_population; i++){
                 printf("Obj.value = %d, permutation: ", population->population[i].obj_func_value);
-                for(j=0; j<15; j++){
+                for(j=0; j<n; j++){
                     printf("%d ", population->population[i].permutation[j]);
                 }
                 printf("\n");

@@ -3,7 +3,8 @@
 #include <iostream>
 #include <memory>
 #include <stdio.h>
-
+#include <time.h>
+#include <stdlib.h>
 
 /** SELECTION FUNCTIONS */
 void elitist_selection(population_t *population, population_t *new_population, int n, int n_population){
@@ -40,4 +41,36 @@ void elitist_selection(population_t *population, population_t *new_population, i
         }
     }
     free(selected_children);
+}
+
+/** SELECTION FUNCTIONS */
+void random_selection(population_t *population, population_t *new_population, int n, int n_population){
+    // compare
+    int *selected_children = (int *)malloc(n_population * sizeof(int));
+
+    int *selected_individuals = (int *)malloc(n_population * sizeof(int));
+
+    int n_selected_individuals = 0;
+    while(n_selected_individuals < n_population){
+        int r = rand() % (n_population*2);      // Returns a pseudo-random integer between 0 and RAND_MAX.
+        int is_selected = 0;
+        int i= 0;
+        
+        // check if index is already selected
+        while(i<n_selected_individuals && is_selected == 0){
+            if(selected_individuals[i] == r){
+                is_selected=1;
+            }
+        }
+
+        // if not selected, add to selected list
+        if(is_selected == 0){
+            selected_individuals[n_selected_individuals] = r;
+            n_selected_individuals +=1;
+        }
+        
+    }
+
+    population_t temporal_population;
+
 }

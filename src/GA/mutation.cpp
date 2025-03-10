@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <stdio.h>
-
+/*
 /// @brief Swap values on permutation of solution_t. Cost O(1)
 /// @param solution Solution_t structure with the permutation
 /// @param n Number of elements
@@ -56,4 +56,4 @@ void swap_op(solution_t *solution, int n, int s1, int s2){
     swap_permutation(solution, n, s1, s2);
     // swap the matrix
     swap_matrix(solution, n, s1, s2);
-}
+}*/

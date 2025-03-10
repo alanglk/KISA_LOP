@@ -19,9 +19,7 @@
 
 int main(int argc, char *argv[]){    
     int *solution = NULL, *matrix = NULL; // solution es la permutación que le corresponde a la solución, matrix su matriz
-    int n; // cantidad de filas y columnas de la matriz
-    int n_population = 300;
-
+    int n, n_population, steps;
 
     // randomize seed
     srand (time(NULL));
@@ -32,7 +30,10 @@ int main(int argc, char *argv[]){
 
     // read file and load initial solution
     read_file(argv[1], &sol, &n);
-    printf("n: %d\n\n", n);
+    n_population = strtoul(argv[2], NULL, 10);
+    steps = strtoul(argv[3], NULL, 10);
+
+    printf("n: %d, n_population: %d and steps: %d\n\n", n, n_population, steps);
 
     // Generate new solutions for the population
     printf("Generating new solutions for the initial population\n");
@@ -40,15 +41,9 @@ int main(int argc, char *argv[]){
     generate_new_instance(&population, &sol, sol.n, n_population);
 
 
-    // print initial population to check that there are not equals
-    /*printf("Printing initial population...\n");
-    for(int i = 0; i<n_population; i++){
-        print_solution(&(population.population[i]), n);
-    }
-    printf("initial population printed!\n");*/
-
     auto begin = std::chrono::high_resolution_clock::now();    
-    GA(&population, n, n_population);
+    // run genetic algorithm
+    GA(&population, n, n_population, steps);
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
