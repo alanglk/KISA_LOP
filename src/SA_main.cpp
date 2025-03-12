@@ -45,8 +45,8 @@ std::ostream& operator<<(std::ostream& os, const solution_t& sol) {
 
 void LOP_objective_function(const std::unique_ptr<solution_t>& sol){
     sol->obj_func_value = 0;
-    for(int i = 0; i<(sol->n+1)/2; i++)
-        for(int j = i+1; j<sol->n; j++)
+    for(int i = 0; i< ( sol->n ); i++)
+        for(int j = i+1; j< sol->n; j++)
             sol->obj_func_value += sol->matrix[i*sol->n+j];
 }
 
