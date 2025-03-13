@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+// #include <algorithm>
 
 #include "LOP.hpp"
 
@@ -11,14 +12,14 @@ std::ostream& operator<<(std::ostream& os, const solution_t& sol) {
     }
     os << "\n";
 
-    // // Print the matrix in a matrix-like form
-    // os << "Matrix: \n";
-    // for (int i = 0; i < sol.n; ++i) {
-    //     for (int j = 0; j < sol.n; ++j) {
-    //         os << sol.matrix[i * sol.n + j] << " ";
-    //     }
-    //     os << "\n";
-    // }
+    // Print the matrix in a matrix-like form
+    os << "Matrix: \n";
+    for (int i = 0; i < sol.n; ++i) {
+        for (int j = 0; j < sol.n; ++j) {
+            os << sol.matrix[i * sol.n + j] << " ";
+        }
+        os << "\n";
+    }
 
     // Print the objective function value
     os << "Objective Function Value: " << sol.obj_func_value << "\n";
@@ -65,6 +66,17 @@ int read_from_file(std::filesystem::path file_path, const std::unique_ptr<soluti
     return 0;
 }
 
+
+std::unique_ptr<solution_t> copy_solution(const std::unique_ptr<solution_t>& original) {
+    // Create a new solution instance
+    auto new_solution = std::make_unique<solution_t>();
+    new_solution->n = original->n;
+    new_solution->obj_func_value = original->obj_func_value;
+    new_solution->permutation = original->permutation;
+    new_solution->matrix = original->matrix;
+    return new_solution;  
+}
+
 /// @brief Swap operation between two elements. Swaps permutation and matrix.
 /// @param solution Structure with permutation and matrix to swap
 /// @param s1 First index to swap with
@@ -86,12 +98,21 @@ void swap_op(const std::unique_ptr<solution_t>& solution, int s1, int s2) {
     }
 }
 
-std::unique_ptr<solution_t> copy_solution(const std::unique_ptr<solution_t>& original) {
-    // Create a new solution instance
-    auto new_solution = std::make_unique<solution_t>();
-    new_solution->n = original->n;
-    new_solution->obj_func_value = original->obj_func_value;
-    new_solution->permutation = original->permutation;
-    new_solution->matrix = original->matrix;
-    return new_solution;  
+/// @brief 2-Opt operation between two segments of the permutation.
+/// @param solution Structure with permutation and matrix to apply 2-opt
+/// @param i First index of the first segment to reverse
+/// @param j Second index of the second segment to reverse
+void two_opt_op(const std::unique_ptr<solution_t>& solution, int s1, int s2) {
+    if (s1 >= s2 || s1 < 0 || s2 >= solution->n) return;  // Valid indices check
+
+    // Reverse the permutation between i and j
+    // std::reverse(solution->permutation.begin() + s1, solution->permutation.begin() + s2 + 1);
+
+    // Update the matrix by swapping rows and columns corresponding to the reversed segment
+    for (int k = 0; k < solution->n; ++k) {
+        // Swap rows
+        std::swap(solution->matrix[s1 * solution->n + k], solution->matrix[s2 * solution->n + k]);
+        // Swap columns
+        std::swap(solution->matrix[k * solution->n + s1], solution->matrix[k * solution->n + s2]);
+    }
 }
