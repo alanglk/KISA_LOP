@@ -12,6 +12,7 @@
 
 #include "LOP.hpp"
 #include "SimulatedAnnealing.hpp"
+#include "Logger.hpp"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -21,14 +22,19 @@ std::random_device SimulatedAnnealing::rd;
 std::mt19937 SimulatedAnnealing::gen(SimulatedAnnealing::rd());
 
 // Constructor
-SimulatedAnnealing::SimulatedAnnealing(double init_T, double beta, int max_chain, int max_iter, int max_stagnation, TUpdateType update_type, TNeighborhood neigh_type) : 
-init_T{init_T}, beta{beta}, max_chain{max_chain}, max_iter{max_iter}, max_stagnation{max_stagnation}, update_type{update_type}, neigh_type{neigh_type}{
-    
-}
+SimulatedAnnealing::SimulatedAnnealing(Config config, Logger& logger)
+    : max_chain(config.max_chain),
+      max_iter(config.max_iter),
+      max_stagnation(config.max_stagnation),
+      init_T(config.T_0),
+      beta(config.beta),
+      update_type(config.update),
+      neigh_type(config.neigh_type),
+      logger(logger) // Se inicializa correctamente la referencia
+{}
 
-
-std::chrono::steady_clock::time_point SimulatedAnnealing::get_current_time(){
-    return std::chrono::steady_clock::now();
+std::chrono::high_resolution_clock::time_point SimulatedAnnealing::get_current_time(){
+    return std::chrono::high_resolution_clock::now();
 }
 
 // Generate a random value using the Mersenne Twister engine
@@ -106,7 +112,7 @@ double SimulatedAnnealing::update_T(double T, int iteration){
         new_T = T * this->beta;
 
     // Logarithmic Update
-    else if (this->update_type == LOGARITMIC)
+    else if (this->update_type == LOGARITHMIC)
         new_T = this->init_T / log(static_cast<double>(iteration) + 1.0);
 
     // Temperature Conditions
@@ -131,12 +137,13 @@ void SimulatedAnnealing::run(const std::unique_ptr<solution_t> &initial_solution
 
     // Register start time
     this->start_time = SimulatedAnnealing::get_current_time();
+    auto iteration_start_time = SimulatedAnnealing::get_current_time();
 
     // The algorithm
     double last_obj_value = x->obj_func_value;
     int stagnation_count = 0;
     int num_iter = 0;
-    std::cout << "Iteration: " << num_iter << " T_k: NaN chain_size: " << this->max_chain << " stagnation: " << stagnation_count << " OFV: " << x->obj_func_value << std::endl;
+    std::cout   << "Iteration: " << num_iter << " T_k: NaN chain_size: " << this->max_chain << " stagnation: " << stagnation_count << " OFV: " << x->obj_func_value << std::endl;
     while (num_iter < this->max_iter && !this->stop){
         int chain_size = 0;
 
@@ -158,7 +165,13 @@ void SimulatedAnnealing::run(const std::unique_ptr<solution_t> &initial_solution
             chain_size++;
         }
         num_iter++;
-        std::cout << "Iteration: " << num_iter << " T_k: " << T_k << " chain_size: " << this->max_chain << " stagnation: " << stagnation_count << " OFV: " << x->obj_func_value << std::endl;
+        
+        auto iteration_end_time = SimulatedAnnealing::get_current_time();
+        auto elapsed_time = std::chrono::duration_cast<std::chrono::nanoseconds>(iteration_end_time - iteration_start_time).count();
+        
+        std::cout   << "Iteration: " << num_iter << " T_k: " << T_k << " chain_size: " << this->max_chain << " stagnation: " << stagnation_count << " OFV: " << x->obj_func_value << " dt: " << elapsed_time << std::endl;
+        iteration_start_time = iteration_end_time;
+
         T_k = this->update_T(T_k, num_iter);
 
         // Stagnation
@@ -170,11 +183,15 @@ void SimulatedAnnealing::run(const std::unique_ptr<solution_t> &initial_solution
         last_obj_value = x->obj_func_value;
         if (this->max_stagnation != -1 & stagnation_count >= this->max_stagnation){
             this->stop = true;
-            std::cout << "Stagnation Stop. Solution reached for " << this->max_stagnation << " iterations." << std::endl;
+            std::cout   << "Stagnation Stop. Solution reached for " << this->max_stagnation << " iterations." << std::endl;
         }
+        
     }
 
     this->end_time = SimulatedAnnealing::get_current_time();
+    auto elapsed_time = std::chrono::duration_cast<std::chrono::nanoseconds>(this->end_time - this->start_time).count();
+    std::cout   << "Simulated Annealing Algorithm Execution took " << elapsed_time << " nanoseconds" << std::endl;
+
     // Store the final solution
     this->final_x = std::move(x);
 }

@@ -2,9 +2,11 @@
 #ifndef LOP_HPP
 #define LOP_HPP
 
+#include <iostream>
+#include <string>
+#include <filesystem>
 #include <vector>
 #include <memory>  // For smart pointers
-#include <filesystem>
 
 struct solution_t {
     std::vector<int> permutation;
@@ -17,6 +19,33 @@ enum TNeighborhood {
     SWAP,
     TWO_OPT
 };
+
+enum TUpdateType{
+    LINEAR,
+    GEOMETRIC,
+    LOGARITHMIC
+};
+
+// Parámetros de Simulated Annealing
+struct Config {
+    std::string file_path = "";
+    int max_chain = 1000;                   // Fixed neighborhood exploration size
+    int max_iter = 100000;                  // Max number of iterations
+    int max_stagnation = 100;               // -1 -> Dont use stagnation stopping
+    double T_0 = 122142;                    // Fixed initial temp
+    double beta = 0.8;                      // Cooling factor
+    TUpdateType update = GEOMETRIC;         // Cooling strategy
+    TNeighborhood neigh_type = SWAP;
+    
+    // Neighborhood
+    int N_random_walks = 10000;
+    int N_random_walk_perturbations = 100;
+    double acceptance_rate = 0.75;
+
+    // 
+    bool use_random_walk = false;           // Initial exploration?
+};
+
 
 std::ostream& operator<<(std::ostream& os, const solution_t& sol);
 

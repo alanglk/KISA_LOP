@@ -6,36 +6,34 @@
 #include <memory>  // For smart pointers
 
 #include "LOP.hpp"
-
-enum TUpdateType{
-    LINEAR,
-    GEOMETRIC,
-    LOGARITMIC
-};
+#include "Logger.hpp"
 
 class SimulatedAnnealing {
 public:
     static std::random_device rd;  // Declaración (sin inicializar)
     static std::mt19937 gen;       // Declaración (sin inicializar)
     
-    double init_T;
-    double beta;
-    int N_random_walks;
-    int N_random_walk_perturbations;
     int max_chain;
     int max_iter;
     int max_stagnation;
+    double init_T;
+    double beta;
     TUpdateType update_type;
     TNeighborhood neigh_type;
+    int N_random_walks;
+    int N_random_walk_perturbations;
+    
     bool stop = false;
 
+    Logger& logger;
+
     std::unique_ptr<solution_t> final_x;
-    std::chrono::steady_clock::time_point start_time;
-    std::chrono::steady_clock::time_point end_time;
+    std::chrono::high_resolution_clock::time_point start_time;
+    std::chrono::high_resolution_clock::time_point end_time;
 
-    SimulatedAnnealing(double init_T, double beta, int max_chain, int max_iter, int max_stagnation, TUpdateType update_type, TNeighborhood neigh_type);
+    SimulatedAnnealing(Config config, Logger& logger);
 
-    static std::chrono::steady_clock::time_point get_current_time();
+    static std::chrono::high_resolution_clock::time_point get_current_time();
     static int get_random_index(int upper_bound);
     static double get_random_prob();
     static std::unique_ptr<solution_t> get_sample_from_newighborhood(const std::unique_ptr<solution_t>& x, TNeighborhood neigh_type);

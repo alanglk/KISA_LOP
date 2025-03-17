@@ -11,8 +11,11 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories(include)
 
 # Agregar los archivos fuente comunes
-set(SOURCES src/LOP.cpp src/SimulatedAnnealing.cpp )
-
+set(SOURCES 
+    src/LOP.cpp 
+    src/Logger.cpp 
+    src/SimulatedAnnealing.cpp
+)
 # Ejecutable principal
 add_executable(main src/main.cpp ${SOURCES})
 
