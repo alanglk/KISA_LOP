@@ -1,7 +1,6 @@
 # KISA_LOP
-Linear Ordering Problem Implementation
+Linear Ordering Problem (LOP) heuristic algorithms implementation
 
-## TODO
--- El swap debería generar los índices internamente
--- Hay resultados repetidos
--- Comprobar que realmente converge
+## Simulated Annealing
+
+## Genetic Algorithm
